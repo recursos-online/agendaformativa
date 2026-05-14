@@ -118,6 +118,8 @@
       position: relative;
       z-index: 1;
       max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     .chip-top {
@@ -152,7 +154,7 @@
     }
 
     .hero>.hero-contenido>p {
-      margin: 12px 0 0;
+      margin: 12px auto 0;
       font-size: .97rem;
       color: #cbd5e1;
       max-width: 720px;
@@ -165,6 +167,7 @@
       grid-template-columns: repeat(4, minmax(120px, 200px));
       gap: 3px;
       margin-top: 28px;
+      justify-content: center;
     }
 
     .resumen div {
@@ -472,6 +475,7 @@
       background: #fff;
       border: none;
       border-left: 5px solid var(--gesforma);
+      border-bottom: 3px solid var(--gesforma);
       border-radius: 0;
       padding: 18px 20px;
       transition: background .15s, box-shadow .15s;
@@ -501,24 +505,28 @@
 
     .curso.Gesforma {
       border-left-color: var(--gesforma);
+      border-bottom-color: var(--gesforma);
       --btn-bg: var(--gesforma);
       --btn-text: white;
     }
 
     .curso.EASP {
       border-left-color: var(--easp);
+      border-bottom-color: var(--easp);
       --btn-bg: var(--easp);
       --btn-text: white;
     }
 
     .curso.Otros {
       border-left-color: var(--otros);
+      border-bottom-color: var(--otros);
       --btn-bg: var(--otros);
       --btn-text: white;
     }
 
     .curso.SesionesenelCentro {
       border-left-color: var(--centro);
+      border-bottom-color: var(--centro);
       --btn-bg: var(--centro);
       --btn-text: white;
     }
