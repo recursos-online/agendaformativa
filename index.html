@@ -10,17 +10,17 @@
     rel="stylesheet">
   <style>
     :root {
-      --gesforma: #2f7abf;
-      --gesforma-soft: #eaf3fb;
+      --gesforma: #1E3A5F;
+      --gesforma-soft: #e8edf5;
 
-      --easp: #2f8b6d;
-      --easp-soft: #eaf7f1;
+      --easp: #0A5C6E;
+      --easp-soft: #e0f2f5;
 
-      --otros: #7a5cc2;
-      --otros-soft: #f1ecfb;
+      --otros: #6B4FA0;
+      --otros-soft: #ece8f7;
 
-      --centro: #d57a2f;
-      --centro-soft: #fff1e3;
+      --centro: #2E7BB8;
+      --centro-soft: #deedf8;
 
       --pizarra: #1f252b;
       --pizarra-2: #2c333a;
@@ -483,19 +483,31 @@
     }
 
     .curso.Gesforma {
-      border-left-color: var(--gesforma)
+      border-left-color: var(--gesforma);
+      background: color-mix(in srgb, var(--gesforma) 4%, white);
+      --btn-bg: var(--gesforma);
+      --btn-text: white;
     }
 
     .curso.EASP {
-      border-left-color: var(--easp)
+      border-left-color: var(--easp);
+      background: color-mix(in srgb, var(--easp) 4%, white);
+      --btn-bg: var(--easp);
+      --btn-text: white;
     }
 
     .curso.Otros {
-      border-left-color: var(--otros)
+      border-left-color: var(--otros);
+      background: color-mix(in srgb, var(--otros) 4%, white);
+      --btn-bg: var(--otros);
+      --btn-text: white;
     }
 
     .curso.SesionesenelCentro {
-      border-left-color: var(--centro)
+      border-left-color: var(--centro);
+      background: color-mix(in srgb, var(--centro) 4%, white);
+      --btn-bg: var(--centro);
+      --btn-text: #17212b;
     }
 
     .cab-curso {
@@ -586,7 +598,7 @@
       text-decoration: none;
       align-items: center;
       justify-content: center;
-      background: var(--pizarra);
+      background: #1E6847;
       color: white;
       border-radius: 12px;
       padding: 11px 16px;
@@ -596,7 +608,7 @@
     }
 
     .btn:hover {
-      background: #111820;
+      filter: brightness(0.85);
       transform: translateY(-2px);
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
     }
@@ -608,29 +620,22 @@
       font-weight: 900;
     }
 
+    /* Estado: inscripción abierta — verde semántico */
     .abierta {
-      background: #e8f6ef;
-      color: #176241
+      background: #D1FAE5;
+      color: #065F46;
     }
 
+    /* Estado: próximamente — ámbar cálido */
     .proxima {
-      background: #fff3e8;
-      color: #9a4d0f
+      background: #FEF3C7;
+      color: #92400E;
     }
 
-    .cerrada {
-      background: #f1f4f7;
-      color: #556170
-    }
-
-    .sininscripcion {
-      background: #eee9fb;
-      color: #5b3ba5
-    }
-
-    .presencial {
-      background: #fff0e3;
-      color: #9b551a
+    /* Resto de estados: hereda tono de categoría, versión suavizada */
+    .estado:not(.abierta):not(.proxima) {
+      background: color-mix(in srgb, var(--btn-bg, #475569) 12%, #f8fafc);
+      color: var(--btn-bg, #475569);
     }
 
     .cal {
@@ -708,6 +713,22 @@
       box-shadow: none;
     }
 
+    .dia.hoy {
+      border: 2px solid #2E7BB8;
+      box-shadow: 0 0 0 2px rgba(46, 123, 184, 0.18), 0 2px 8px rgba(46, 123, 184, 0.12);
+    }
+
+    .dia.hoy .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1E3A5F;
+      color: white;
+      border-radius: 6px;
+      padding: 2px 6px;
+      min-width: 22px;
+    }
+
     .num {
       font-weight: 900;
       margin-bottom: 4px;
@@ -742,6 +763,11 @@
 
     .ev.SesionesenelCentro {
       background: var(--centro)
+    }
+
+    .ev.pasado {
+      text-decoration: line-through;
+      opacity: 0.6;
     }
 
     .leyenda {
@@ -1170,7 +1196,18 @@
 
     function fb(s) {
       const d = pf(s);
-      return d ? d.toLocaleDateString('es-ES') : '-';
+      if (!d) return '-';
+      const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+      const d_date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      const diffTime = d_date - h;
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays === 0) return 'Hoy';
+      if (diffDays === 1) return 'Mañana';
+      return d.toLocaleDateString('es-ES');
+    }
+
+    function val(v) {
+      return (v === undefined || v === null || v === '') ? '-' : v;
     }
 
     function limpia(t) {
@@ -1216,7 +1253,7 @@
 
       if (i && f && h >= i && h <= f) return { t: 'Inscripción abierta', cl: 'abierta' };
       if (!i && f && h <= f) return { t: 'Inscripción abierta hasta ' + fb(c.fechaInscripcionFin), cl: 'abierta' };
-      if (ini && h < ini) return { t: 'Próximo', cl: 'proxima' };
+      if (ini && h < ini) return { t: 'Inscripción próximamente', cl: 'proxima' };
       return { t: 'Finalizado / cerrado', cl: 'cerrada' };
     }
 
@@ -1264,30 +1301,33 @@
         const hc = () => {
           let h = (c.horas && !c.horas.match(/no indicad/i) && c.horas !== '-') ? c.horas.replace(/ horas?/i, 'h') : '';
           let cr = (c.creditos && !c.creditos.match(/no indicad|no aplica/i) && c.creditos !== '-') ? c.creditos : '';
-          if (!h && !cr) return '-h';
+          if (!h && !cr) return '-';
           if (h && cr) return h + ' / ' + cr + ' cr';
           return h || (cr + ' cr');
         };
 
-        const fechas = fb(c.fechaInicio) + (c.fechaFin && c.fechaFin !== c.fechaInicio ? ' al ' + fb(c.fechaFin) : '');
+        let fechas = fb(c.fechaInicio);
+        if (c.fechaFin && c.fechaFin !== c.fechaInicio) {
+          fechas += ' al ' + fb(c.fechaFin);
+        }
 
         return `
       <article class="curso ${areaClass(c.area)}" id="${c.id}">
         <div class="cab-curso">
-          <h3>${c.titulo}</h3>
-          <span class="badge b${areaClass(c.area)}">${c.area}</span>
+          <h3>${val(c.titulo)}</h3>
+          <span class="badge b${areaClass(c.area)}">${val(c.area)}</span>
         </div>
 
         <div class="meta">
-          <div class="dato"><span>Inscripción</span><strong>${insc(c)}</strong></div>
+          <div class="dato"><span>Inscripción</span><strong>${val(insc(c))}</strong></div>
           <div class="dato"><span>Fechas</span><strong>${fechas}${c.hora ? ' · ' + c.hora + 'h' : ''}</strong></div>
-          <div class="dato"><span>Lugar</span><strong>${c.lugar} · ${c.modalidad}</strong></div>
+          <div class="dato"><span>Lugar</span><strong>${val(c.lugar)} · ${val(c.modalidad)}</strong></div>
           <div class="dato"><span>Horas / Cr.</span><strong>${hc()}</strong></div>
-          <div class="dato"><span>Entidad</span><strong>${c.entidad}</strong></div>
-          <div class="dato"><span>Dirigido a</span><strong>${c.dirigidoA}</strong></div>
+          <div class="dato"><span>Entidad</span><strong>${val(c.entidad)}</strong></div>
+          <div class="dato"><span>Dirigido a</span><strong>${val(c.dirigidoA)}</strong></div>
         </div>
 
-        <p class="desc">${c.descripcion}</p>
+        <p class="desc">${val(c.descripcion)}</p>
 
         <div class="acciones">
           ${link}
@@ -1313,12 +1353,14 @@
 
       const modo = document.getElementById('modoCal').value;
       const r = filtra();
+      const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       let html = '';
 
       for (let k = 0; k < 42; k++) {
         const d = new Date(ini);
         d.setDate(ini.getDate() + k);
         const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        const isPast = d < h;
 
         let ev = [];
 
@@ -1334,15 +1376,17 @@
           }
         });
 
+        const isToday = d.getFullYear() === hoy.getFullYear() && d.getMonth() === hoy.getMonth() && d.getDate() === hoy.getDate();
+
         html += `
-      <div class="dia ${d.getMonth() !== m ? 'fuera' : ''}">
+      <div class="dia ${d.getMonth() !== m ? 'fuera' : ''} ${isToday ? 'hoy' : ''}">
         <div class="num">${d.getDate()}</div>
         ${ev.slice(0, 3).map(e => `
-          <div class="ev ${areaClass(e.c.area)}" title="${e.txt} · ${e.c.titulo}" onclick="goEvent('${e.c.id}')">
+          <div class="ev ${areaClass(e.c.area)} ${isPast ? 'pasado' : ''}" title="${e.txt} · ${e.c.titulo}" onclick="goEvent('${e.c.id}')">
             ${e.txt} · ${e.c.titulo.replace('Plan de Igualdad del Servicio Andaluz de Salud · ', '')}
           </div>
         `).join('')}
-        ${ev.length > 3 ? `<div class="ev ${areaClass(ev[0].c.area)}">+${ev.length - 3} más</div>` : ''}
+        ${ev.length > 3 ? `<div class="ev ${areaClass(ev[0].c.area)} ${isPast ? 'pasado' : ''}">+${ev.length - 3} más</div>` : ''}
       </div>
     `;
       }
@@ -1372,12 +1416,21 @@
 
       cont.innerHTML = prox.map(c => {
         const d = pf(c.fechaInicio);
+        const fbRes = fb(c.fechaInicio);
+        let diaHtml;
+        if (fbRes === 'Hoy') {
+          diaHtml = `<span style="font-size: .95rem; font-weight: 900; display: block; padding: 4px 0;">Hoy</span>`;
+        } else if (fbRes === 'Mañana') {
+          diaHtml = `<span style="font-size: .72rem; font-weight: 900; display: block; padding: 6px 0;">Mañana</span>`;
+        } else {
+          diaHtml = `<strong>${String(d.getDate()).padStart(2, '0')}</strong><span>${mesesCorto[d.getMonth()]}</span>`;
+        }
+
         return `
       <article class="proxima-card ${areaClass(c.area)}" onclick="goEvent('${c.id}')">
         <div class="fecha-mini">
           <div class="dia-mini">
-            <strong>${String(d.getDate()).padStart(2, '0')}</strong>
-            <span>${mesesCorto[d.getMonth()]}</span>
+            ${diaHtml}
           </div>
           <span class="badge b${areaClass(c.area)}">${c.area}</span>
         </div>
