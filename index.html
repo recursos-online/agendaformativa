@@ -77,6 +77,366 @@
       }
     }
 
+    /* ── Propiedades CSS animables para los 5 rayos ── */
+    @property --b1 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: -60%;
+    }
+
+    @property --b2 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: 165%;
+    }
+
+    @property --b3 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: -60%;
+    }
+
+    @property --b4 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: -60%;
+    }
+
+    @property --b5 {
+      syntax: '<percentage>';
+      inherits: false;
+      initial-value: -60%;
+    }
+
+    @property --b1y {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 79px;
+    }
+
+    @property --b2y {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 239px;
+    }
+
+    @property --b3x {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 160px;
+    }
+
+    @property --b4y {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 159px;
+    }
+
+    @property --b5x {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 480px;
+    }
+
+    /* Viajes individuales (7 s cada uno) */
+    @keyframes heroB1 {
+      from {
+        --b1: -60%
+      }
+
+      to {
+        --b1: 165%
+      }
+    }
+
+    @keyframes heroB2 {
+      from {
+        --b2: 165%
+      }
+
+      to {
+        --b2: -60%
+      }
+    }
+
+    @keyframes heroB3 {
+      from {
+        --b3: -60%
+      }
+
+      to {
+        --b3: 165%
+      }
+    }
+
+    @keyframes heroB4 {
+      from {
+        --b4: -60%
+      }
+
+      to {
+        --b4: 165%
+      }
+    }
+
+    @keyframes heroB5 {
+      from {
+        --b5: -60%
+      }
+
+      to {
+        --b5: 165%
+      }
+    }
+
+    /* Selección de línea/columna (63 s, función escalón cada 11.12 % = 7 s) */
+    /* B1Y y B4Y cubren las 3 líneas horizontales rotando en orden diferente */
+    @keyframes heroB1Y {
+
+      0%,
+      11.10% {
+        --b1y: 79px
+      }
+
+      11.12%,
+      22.21% {
+        --b1y: 239px
+      }
+
+      22.23%,
+      33.32% {
+        --b1y: 159px
+      }
+
+      33.34%,
+      44.43% {
+        --b1y: 79px
+      }
+
+      44.45%,
+      55.54% {
+        --b1y: 239px
+      }
+
+      55.56%,
+      66.65% {
+        --b1y: 159px
+      }
+
+      66.67%,
+      77.76% {
+        --b1y: 79px
+      }
+
+      77.78%,
+      88.87% {
+        --b1y: 239px
+      }
+
+      88.89%,
+      100% {
+        --b1y: 159px
+      }
+    }
+
+    @keyframes heroB2Y {
+
+      0%,
+      11.10% {
+        --b2y: 239px
+      }
+
+      11.12%,
+      22.21% {
+        --b2y: 159px
+      }
+
+      22.23%,
+      33.32% {
+        --b2y: 79px
+      }
+
+      33.34%,
+      44.43% {
+        --b2y: 239px
+      }
+
+      44.45%,
+      55.54% {
+        --b2y: 159px
+      }
+
+      55.56%,
+      66.65% {
+        --b2y: 79px
+      }
+
+      66.67%,
+      77.76% {
+        --b2y: 239px
+      }
+
+      77.78%,
+      88.87% {
+        --b2y: 159px
+      }
+
+      88.89%,
+      100% {
+        --b2y: 79px
+      }
+    }
+
+    @keyframes heroB4Y {
+
+      0%,
+      11.10% {
+        --b4y: 159px
+      }
+
+      11.12%,
+      22.21% {
+        --b4y: 79px
+      }
+
+      22.23%,
+      33.32% {
+        --b4y: 239px
+      }
+
+      33.34%,
+      44.43% {
+        --b4y: 159px
+      }
+
+      44.45%,
+      55.54% {
+        --b4y: 79px
+      }
+
+      55.56%,
+      66.65% {
+        --b4y: 239px
+      }
+
+      66.67%,
+      77.76% {
+        --b4y: 159px
+      }
+
+      77.78%,
+      88.87% {
+        --b4y: 79px
+      }
+
+      88.89%,
+      100% {
+        --b4y: 239px
+      }
+    }
+
+    /* B3X y B5X cubren columnas verticales distribuidas por todo el ancho */
+    @keyframes heroB3X {
+
+      0%,
+      11.10% {
+        --b3x: 160px
+      }
+
+      11.12%,
+      22.21% {
+        --b3x: 560px
+      }
+
+      22.23%,
+      33.32% {
+        --b3x: 240px
+      }
+
+      33.34%,
+      44.43% {
+        --b3x: 880px
+      }
+
+      44.45%,
+      55.54% {
+        --b3x: 400px
+      }
+
+      55.56%,
+      66.65% {
+        --b3x: 720px
+      }
+
+      66.67%,
+      77.76% {
+        --b3x: 1040px
+      }
+
+      77.78%,
+      88.87% {
+        --b3x: 320px
+      }
+
+      88.89%,
+      100% {
+        --b3x: 1120px
+      }
+    }
+
+    @keyframes heroB5X {
+
+      0%,
+      11.10% {
+        --b5x: 480px
+      }
+
+      11.12%,
+      22.21% {
+        --b5x: 800px
+      }
+
+      22.23%,
+      33.32% {
+        --b5x: 640px
+      }
+
+      33.34%,
+      44.43% {
+        --b5x: 320px
+      }
+
+      44.45%,
+      55.54% {
+        --b5x: 960px
+      }
+
+      55.56%,
+      66.65% {
+        --b5x: 480px
+      }
+
+      66.67%,
+      77.76% {
+        --b5x: 800px
+      }
+
+      77.78%,
+      88.87% {
+        --b5x: 560px
+      }
+
+      88.89%,
+      100% {
+        --b5x: 400px
+      }
+    }
+
+
+
+
+
+
     @keyframes slideIn {
       from {
         opacity: 0;
@@ -112,6 +472,40 @@
       background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .015) 0, rgba(255, 255, 255, .015) 1px, transparent 1px, transparent 80px),
         repeating-linear-gradient(0deg, rgba(255, 255, 255, .015) 0, rgba(255, 255, 255, .015) 1px, transparent 1px, transparent 80px);
       pointer-events: none;
+    }
+
+    /* Brillo animado — 5 rayos: 3 horizontales (cubriendo las 3 líneas a la vez) + 2 verticales */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(100, 180, 255, .00) 15%, rgba(100, 180, 255, .26) 50%, rgba(100, 180, 255, .00) 85%, transparent 100%) no-repeat,
+        linear-gradient(90deg, transparent 0%, rgba(140, 200, 255, .00) 15%, rgba(140, 200, 255, .18) 50%, rgba(140, 200, 255, .00) 85%, transparent 100%) no-repeat,
+        linear-gradient(180deg, transparent 0%, rgba(120, 190, 255, .00) 15%, rgba(120, 190, 255, .20) 50%, rgba(120, 190, 255, .00) 85%, transparent 100%) no-repeat,
+        linear-gradient(90deg, transparent 0%, rgba(160, 210, 255, .00) 15%, rgba(160, 210, 255, .16) 50%, rgba(160, 210, 255, .00) 85%, transparent 100%) no-repeat,
+        linear-gradient(180deg, transparent 0%, rgba(100, 180, 255, .00) 15%, rgba(100, 180, 255, .14) 50%, rgba(100, 180, 255, .00) 85%, transparent 100%) no-repeat;
+      background-size: 38% 1px, 28% 1px, 1px 42%, 22% 1px, 1px 30%;
+      background-position:
+        left var(--b1) bottom var(--b1y),
+        left var(--b2) bottom var(--b2y),
+        var(--b3x) var(--b3),
+        left var(--b4) bottom var(--b4y),
+        var(--b5x) var(--b5);
+      /* Delays negativos equidistantes (7s÷5 = 1.4s) → los rayos arrrancan ya
+         distribuidos por el ciclo: siempre hay 3-4 visibles, nunca todos fuera */
+      animation:
+        heroB1 7s linear infinite 0.0s,
+        heroB1Y 63s linear infinite 0.0s,
+        heroB2 7s linear infinite -1.4s,
+        heroB2Y 63s linear infinite -1.4s,
+        heroB3 7s linear infinite -2.8s,
+        heroB3X 63s linear infinite -2.8s,
+        heroB4 7s linear infinite -4.2s,
+        heroB4Y 63s linear infinite -4.2s,
+        heroB5 7s linear infinite -5.6s,
+        heroB5X 63s linear infinite -5.6s;
     }
 
     .hero-contenido {
@@ -1064,8 +1458,8 @@
         <div class="resumen">
           <div><strong id="total">0</strong><span>Actividades cargadas</span></div>
           <div><strong id="abiertas">0</strong><span>Inscripciones abiertas</span></div>
-          <div><strong id="proximos">0</strong><span>Próximos inicios</span></div>
-          <div><strong id="centro">0</strong><span>Sesiones del centro</span></div>
+          <div><strong id="proximos">0</strong><span>Inicios proximos</span></div>
+          <div><strong id="centro">0</strong><span>Sesiones en el centro</span></div>
         </div>
       </div>
     </header>
@@ -1112,6 +1506,7 @@
           <option value="insAsc">Apertura inscripción más próxima</option>
           <option value="insDesc">Apertura inscripción más lejana</option>
           <option value="titulo">Título A-Z</option>
+          <option value="EventosPasados">⏮ Eventos Pasados</option>
         </select>
 
       </div>
@@ -1256,6 +1651,16 @@
       return (v === undefined || v === null || v === '') ? '-' : v;
     }
 
+    /* Devuelve true si el evento ya ha terminado (fechaFin < hoy, o fechaInicio si no hay fin) */
+    function esPasado(c) {
+      const hd = new Date();
+      hd.setHours(0, 0, 0, 0);
+      const fechaRef = c.fechaFin || c.fechaInicio;
+      if (!fechaRef) return false;
+      const fin = pf(fechaRef);
+      return fin !== null && fin < hd;
+    }
+
     function limpia(t) {
       return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
@@ -1307,13 +1712,20 @@
       const q = limpia(document.getElementById('buscar').value);
       const a = document.getElementById('fArea').value;
       const o = document.getElementById('orden').value;
+      const soloP = (o === 'EventosPasados');
 
-      let r = cursos.filter(c =>
-        (a === 'Todas' || c.area === a) &&
-        limpia(Object.values(c).join(' ')).includes(q)
-      );
+      let r = cursos.filter(c => {
+        const matchQ = limpia(Object.values(c).join(' ')).includes(q);
+        const past = esPasado(c);
+        /* Si se elige «Eventos Pasados» en orden: mostrar solo los terminados del área elegida */
+        if (soloP) return past && (a === 'Todas' || c.area === a) && matchQ;
+        /* Resto: mostrar solo eventos vigentes/futuros del área elegida */
+        return !past && (a === 'Todas' || c.area === a) && matchQ;
+      });
 
       r.sort((x, y) => {
+        /* Eventos Pasados: el más reciente primero */
+        if (soloP) return (pf(y.fechaFin) || pf(y.fechaInicio)) - (pf(x.fechaFin) || pf(x.fechaInicio));
         if (o === 'inicioAsc') return pf(x.fechaInicio) - pf(y.fechaInicio);
         if (o === 'inicioDesc') return pf(y.fechaInicio) - pf(x.fechaInicio);
         if (o === 'insAsc') return (pf(x.fechaInscripcionInicio) || pf(x.fechaInscripcionFin) || pf(x.fechaInicio)) - (pf(y.fechaInscripcionInicio) || pf(y.fechaInscripcionFin) || pf(y.fechaInicio));
