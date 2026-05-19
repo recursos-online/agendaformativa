@@ -1502,12 +1502,29 @@
       background: #16a34a;
       color: white;
       width: 100%;
-      margin-top: 8px;
     }
 
     .btn-admin.verde:hover {
       background: #15803d;
       box-shadow: 0 6px 18px rgba(22, 163, 74, .28);
+    }
+
+    .btn-admin.azul {
+      background: var(--acento);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-admin.azul:hover {
+      background: #2b7bc0;
+      box-shadow: 0 6px 18px rgba(58, 143, 212, .28);
+    }
+
+    .admin-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
     }
 
     .error-login {
@@ -1649,6 +1666,14 @@
         align-items: flex-start;
       }
 
+      .zona-privada-btn {
+        padding: 6px 10px;
+      }
+
+      .zp-text {
+        display: none;
+      }
+
       .proximas-grid {
         grid-template-columns: 1fr
       }
@@ -1718,7 +1743,7 @@
           <div class="chip-top" style="margin-bottom:0">🩺 Formación para profesionales</div>
           <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración"
             onclick="abrirLogin()">
-            <span class="lock-icon">🔒</span> Zona Privada
+            <span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span>
           </button>
         </div>
         <h1>Agenda Formativa</h1>
@@ -1865,7 +1890,10 @@
           </div>
         </div>
         <div id="errAdmin" class="error-login"></div>
-        <button class="btn-admin verde" onclick="agregarCurso()">✚ Agregar Curso</button>
+        <div class="admin-actions">
+          <button class="btn-admin verde" onclick="agregarCurso()">✚ Agregar Curso</button>
+          <button class="btn-admin azul" onclick="descargarHTML()">⬇️ Descargar HTML</button>
+        </div>
       </div>
     </div>
 
@@ -1989,7 +2017,7 @@
   </div>
 
   <script>
-    const cursos = [
+    let cursos = [
       { id: 'g1', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 1ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-05-05', fechaInscripcionFin: '2026-05-18', fechaInicio: '2026-05-19', fechaFin: '2026-06-08', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
       { id: 'g2', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 2ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-05-19', fechaInscripcionFin: '2026-06-08', fechaInicio: '2026-06-09', fechaFin: '2026-06-29', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
       { id: 'g3', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 3ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-06-09', fechaInscripcionFin: '2026-07-13', fechaInicio: '2026-07-14', fechaFin: '2026-08-03', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
@@ -2011,6 +2039,23 @@
 
       { id: 'gesforma-tabaquismo-basica-2026', titulo: 'Intervención Básica en Tabaquismo', area: 'Gesforma', entidad: 'Gesforma Servicios Centrales SAS', dirigidoA: 'Enfermería y médicos', plazas: 'No indicado', fechaInscripcionInicio: '', fechaInscripcionFin: '2026-05-31', fechaInicio: '2026-06-01', fechaFin: '', hora: '', lugar: 'Virtual / Gesforma', horas: '5 horas', creditos: 'No indicado', categoria: 'Tabaquismo', modalidad: 'Virtual', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesformafaces/index.xhtml', descripcion: 'Curso virtual de Intervención Básica en Tabaquismo, dirigido a profesionales de Enfermería y Medicina. Inscripción hasta el 31 de mayo.' }
     ];
+
+    try {
+      const guardados = localStorage.getItem('cursos_agenda');
+      if (guardados) {
+        const parseados = JSON.parse(guardados);
+        const customCourses = parseados.filter(c => c.id.startsWith('custom-'));
+        
+        // Solo añadir si el ID no existe ya (evita duplicados cuando se haya descargado y subido el HTML a GitHub con los cursos incrustados)
+        customCourses.forEach(cc => {
+          if (!cursos.find(existente => existente.id === cc.id)) {
+            cursos.push(cc);
+          }
+        });
+      }
+    } catch(e) {
+      console.error('Error cargando cursos', e);
+    }
 
     const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
     const mesesCorto = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -2079,11 +2124,20 @@
 
     function insc(c) {
       if (esPasado(c)) return '-';
+      
+      const hoy = new Date();
+      const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+      const f = pf(c.fechaInscripcionFin);
+      const i = pf(c.fechaInscripcionInicio);
+
+      if (f && h > f) return 'Plazo finalizado';
+      
       if (c.inscripcionTexto) return c.inscripcionTexto;
       if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') return 'Inscripción abierta';
       if (c.inscripcionAbierta) return 'Inscripción abierta';
       if (c.enlace && c.area !== 'Sesiones en el Centro' && !c.fechaInscripcionInicio && !c.fechaInscripcionFin) return 'Inscripción abierta';
       if (!c.fechaInscripcionInicio && !c.fechaInscripcionFin) return '-';
+      
       if (!c.fechaInscripcionInicio && c.fechaInscripcionFin) return 'Hasta ' + fb(c.fechaInscripcionFin);
       return fb(c.fechaInscripcionInicio) + ' al ' + fb(c.fechaInscripcionFin);
     }
@@ -2097,6 +2151,13 @@
       const f = pf(c.fechaInscripcionFin);
       const ini = pf(c.fechaInicio);
 
+      // 1. Si la inscripción ya ha terminado
+      if (f && h > f) return { t: 'Inscripción finalizada', cl: 'cerrada' };
+      
+      // 2. Si la inscripción aún no ha empezado
+      if (i && h < i) return { t: 'Inscripción próximamente', cl: 'proxima' };
+
+      // 3. Casos estáticos (solo aplican si las fechas no indican que ya cerró o aún no empezó)
       if (c.estadoTexto) return { t: c.estadoTexto, cl: c.estadoClase || 'abierta' };
       if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') {
         return { t: 'Inscripción abierta', cl: 'abierta' };
@@ -2114,9 +2175,14 @@
         return { t: 'Sin inscripción online', cl: 'sininscripcion' };
       }
 
+      // 4. Lógica dinámica de fechas de inscripción
       if (i && f && h >= i && h <= f) return { t: 'Inscripción abierta', cl: 'abierta' };
       if (!i && f && h <= f) return { t: 'Inscripción abierta hasta ' + fb(c.fechaInscripcionFin), cl: 'abierta' };
-      if (ini && h < ini) return { t: 'Inscripción próximamente', cl: 'proxima' };
+      if (i && !f && h >= i) return { t: 'Inscripción abierta', cl: 'abierta' };
+      
+      // Si la actividad aún no ha empezado pero no hay fechas de inscripción explícitas (o han pasado por error lógico)
+      if (ini && h < ini) return { t: 'Próximamente', cl: 'proxima' };
+      
       return { t: 'Finalizado / cerrado', cl: 'cerrada' };
     }
 
@@ -2409,7 +2475,7 @@
         btn.style.background = 'rgba(22,163,74,.18)';
         btn.style.borderColor = 'rgba(22,163,74,.5)';
         btn.style.color = '#86efac';
-        btn.innerHTML = '<span class="lock-icon">🔓</span> Zona Privada';
+        btn.innerHTML = '<span class="lock-icon">🔓</span> <span class="zp-text">Zona Privada</span>';
         abrirAdmin();
       } else {
         const err = document.getElementById('errorLogin');
@@ -2495,6 +2561,14 @@
 
       // Añadir al array global
       cursos.push(nuevoCurso);
+      
+      // Guardar custom courses en localStorage
+      try {
+        const customCourses = cursos.filter(c => c.id.startsWith('custom-'));
+        localStorage.setItem('cursos_agenda', JSON.stringify(customCourses));
+      } catch(e) {
+        console.error('Error guardando curso', e);
+      }
 
       // Refrescar toda la web
       pinta();
@@ -2523,6 +2597,65 @@
         const el = document.getElementById(nuevoCurso.id);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 400);
+    }
+
+    async function descargarHTML() {
+      try {
+        // Clonar el documento para no afectar la vista actual
+        const clone = document.documentElement.cloneNode(true);
+        
+        // Limpiar contenido inyectado por JS para no engordar el archivo
+        const toClean = ['lista', 'grid', 'proximasGrid'];
+        toClean.forEach(id => {
+          const el = clone.querySelector('#' + id);
+          if (el) el.innerHTML = '';
+        });
+        
+        // Restaurar estado de modales y botones
+        clone.querySelector('#modalAdmin').classList.remove('abierto');
+        clone.querySelector('#modalLogin').classList.remove('abierto');
+        
+        const btnZP = clone.querySelector('#btnZonaPrivada');
+        if(btnZP) {
+          btnZP.innerHTML = '<span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span>';
+          btnZP.removeAttribute('style');
+        }
+        
+        const errA = clone.querySelector('#errAdmin');
+        if(errA) errA.style.display = 'none';
+        
+        const errL = clone.querySelector('#errorLogin');
+        if(errL) errL.style.display = 'none';
+        
+        // Eliminar notificaciones (toasts) residuales
+        clone.querySelectorAll('.toast').forEach(t => t.remove());
+        
+        // Generar HTML base
+        let html = '<!DOCTYPE html>\n' + clone.outerHTML;
+
+        // Convertir el array actual de cursos a string formateado
+        // Reemplazamos las comillas de las claves para que quede como el código original
+        const cursosStr = JSON.stringify(cursos, null, 6).replace(/"([^"]+)":/g, '$1:');
+
+        // Buscar el bloque let cursos = [...] en el HTML y reemplazarlo con el actualizado
+        const regex = /let cursos = \[[\s\S]*?\];/;
+        html = html.replace(regex, 'let cursos = ' + cursosStr.trim() + ';');
+
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'index.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        mostrarToast('✓ index.html descargado', '#16a34a');
+      } catch (e) {
+        console.error(e);
+        mostrarToast('Error al generar el HTML', '#dc2626');
+      }
     }
 
     window.addEventListener('scroll', () => {
