@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -1308,6 +1308,272 @@
       transform: translateY(-3px);
     }
 
+    /* ── ZONA PRIVADA ── */
+    .zona-privada-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(220, 38, 38, .15);
+      border: 1px solid rgba(220, 38, 38, .4);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #fca5a5;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+      margin-left: 10px;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .zona-privada-btn:hover {
+      background: rgba(220, 38, 38, .28);
+      border-color: rgba(220, 38, 38, .7);
+      color: #fee2e2;
+    }
+
+    .zona-privada-btn .lock-icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* ── MODALES ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 26, .72);
+      backdrop-filter: blur(4px);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s;
+    }
+
+    .modal-overlay.abierto {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 30px 28px;
+      transform: translateY(20px) scale(.97);
+      transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+      position: relative;
+    }
+
+    .modal-overlay.abierto .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-box.ancho {
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #94a3b8;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color .15s, background .15s;
+    }
+
+    .modal-close:hover {
+      color: #dc2626;
+      background: #fee2e2;
+    }
+
+    .modal-box h2 {
+      margin: 0 0 6px;
+      font-size: 1.3rem;
+      color: var(--pizarra);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+    }
+
+    .modal-box .sub {
+      font-size: .85rem;
+      color: #64748b;
+      margin-bottom: 22px;
+    }
+
+    .campo-grupo {
+      margin-bottom: 14px;
+    }
+
+    .campo-grupo label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    .campo-grupo input,
+    .campo-grupo select,
+    .campo-grupo textarea {
+      width: 100%;
+      border: 1.5px solid #d0dbe6;
+      border-radius: 5px;
+      padding: 10px 12px;
+      font-size: .93rem;
+      background: #f8fbfd;
+      outline: none;
+      color: var(--texto);
+      font-family: inherit;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .campo-grupo textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .campo-grupo input:focus,
+    .campo-grupo select:focus,
+    .campo-grupo textarea:focus {
+      border-color: var(--acento);
+      box-shadow: 0 0 0 3px rgba(58, 143, 212, .12);
+      background: #fff;
+    }
+
+    .campos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 14px;
+    }
+
+    .campos-grid .campo-grupo.full {
+      grid-column: 1 / -1;
+    }
+
+    .btn-admin {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 22px;
+      border-radius: 5px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      transition: background .15s, box-shadow .15s, transform .1s;
+    }
+
+    .btn-admin:active {
+      transform: scale(.97);
+    }
+
+    .btn-admin.primario {
+      background: var(--pizarra);
+      color: white;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .btn-admin.primario:hover {
+      background: var(--acento);
+      box-shadow: 0 6px 18px rgba(58, 143, 212, .28);
+    }
+
+    .btn-admin.verde {
+      background: #16a34a;
+      color: white;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn-admin.verde:hover {
+      background: #15803d;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, .28);
+    }
+
+    .error-login {
+      color: #dc2626;
+      font-size: .84rem;
+      font-weight: 600;
+      margin-top: 10px;
+      display: none;
+      background: #fee2e2;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .admin-icon-lock {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .notif-toast {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      background: #16a34a;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .9rem;
+      z-index: 99999;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
+      max-width: 320px;
+    }
+
+    .notif-toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .separador-admin {
+      border: none;
+      border-top: 1.5px solid #e2e8f0;
+      margin: 16px 0 14px;
+    }
+
+    .admin-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .admin-badge {
+      background: #dc2626;
+      color: white;
+      font-size: .7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 3px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
     /* ── RESPONSIVE ── */
     @media(max-width:1120px) {
       .layout {
@@ -1448,7 +1714,13 @@
   <div class="pagina">
     <header class="hero">
       <div class="hero-contenido">
-        <div class="chip-top">🩺 Formación para profesionales</div>
+        <div style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <div class="chip-top" style="margin-bottom:0">🩺 Formación para profesionales</div>
+          <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración"
+            onclick="abrirLogin()">
+            <span class="lock-icon">🔒</span> Zona Privada
+          </button>
+        </div>
         <h1>Agenda Formativa</h1>
         <div class="subtitulo-hero">Centro de Salud Tiro de Pichón</div>
         <p>
@@ -1463,6 +1735,142 @@
         </div>
       </div>
     </header>
+
+    <!-- ── MODAL LOGIN ── -->
+    <div class="modal-overlay" id="modalLogin" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="modal-box">
+        <button class="modal-close" onclick="cerrarLogin()" aria-label="Cerrar">×</button>
+        <span class="admin-icon-lock">🔐</span>
+        <h2 id="loginTitle">Zona Privada</h2>
+        <p class="sub">Acceso restringido a administradores del portal</p>
+        <div class="campo-grupo">
+          <label for="loginUsuario">Usuario</label>
+          <input type="text" id="loginUsuario" placeholder="Introduce tu usuario" autocomplete="username">
+        </div>
+        <div class="campo-grupo">
+          <label for="loginPass">Contraseña</label>
+          <input type="password" id="loginPass" placeholder="Introduce tu contraseña" autocomplete="current-password">
+        </div>
+        <div class="error-login" id="errorLogin">Usuario o contraseña incorrectos. Inténtalo de nuevo.</div>
+        <button class="btn-admin primario" id="btnEntrar" onclick="intentarLogin()">Entrar</button>
+      </div>
+    </div>
+
+    <!-- ── MODAL ADMIN: AÑADIR CURSO ── -->
+    <div class="modal-overlay" id="modalAdmin" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+      <div class="modal-box ancho">
+        <button class="modal-close" onclick="cerrarAdmin()" aria-label="Cerrar">×</button>
+        <div class="admin-header">
+          <div>
+            <h2 id="adminTitle">Panel de Administración</h2>
+            <p class="sub" style="margin-bottom:0">Añade un nuevo curso o actividad a la agenda</p>
+          </div>
+          <span class="admin-badge">Admin</span>
+        </div>
+        <hr class="separador-admin">
+        <div class="campos-grid">
+          <!-- Título -->
+          <div class="campo-grupo full">
+            <label for="aTitle">Título del curso / actividad *</label>
+            <input type="text" id="aTitle" placeholder="Nombre completo de la actividad">
+          </div>
+          <!-- Categoría (área) -->
+          <div class="campo-grupo">
+            <label for="aArea">Categoría *</label>
+            <select id="aArea">
+              <option value="Gesforma">Formación Gesforma</option>
+              <option value="EASP">Formación EASP</option>
+              <option value="Sesiones en el Centro">Sesiones en el Centro</option>
+              <option value="Otros">Otros cursos o eventos</option>
+            </select>
+          </div>
+          <!-- Modalidad -->
+          <div class="campo-grupo">
+            <label for="aModalidad">Modalidad</label>
+            <select id="aModalidad">
+              <option value="Virtual">Virtual</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Semipresencial">Semipresencial</option>
+            </select>
+          </div>
+          <!-- Entidad -->
+          <div class="campo-grupo full">
+            <label for="aEntidad">Entidad organizadora</label>
+            <input type="text" id="aEntidad" placeholder="p.ej. Gesforma, EASP, Centro de Salud Tiro de Pichón…">
+          </div>
+          <!-- Dirigido a -->
+          <div class="campo-grupo full">
+            <label for="aDirigido">Dirigido a</label>
+            <input type="text" id="aDirigido" placeholder="p.ej. Todas las categorías, Enfermería y médicos…">
+          </div>
+          <!-- Fecha inicio inscripción -->
+          <div class="campo-grupo">
+            <label for="aFInsIni">Apertura inscripción</label>
+            <input type="date" id="aFInsIni">
+          </div>
+          <!-- Fecha fin inscripción -->
+          <div class="campo-grupo">
+            <label for="aFInsFin">Cierre inscripción</label>
+            <input type="date" id="aFInsFin">
+          </div>
+          <!-- Fecha inicio actividad -->
+          <div class="campo-grupo">
+            <label for="aFIni">Fecha de inicio *</label>
+            <input type="date" id="aFIni">
+          </div>
+          <!-- Fecha fin actividad -->
+          <div class="campo-grupo">
+            <label for="aFFin">Fecha de finalización</label>
+            <input type="date" id="aFFin">
+          </div>
+          <!-- Hora -->
+          <div class="campo-grupo">
+            <label for="aHora">Hora</label>
+            <input type="time" id="aHora" placeholder="p.ej. 14:00">
+          </div>
+          <!-- Lugar -->
+          <div class="campo-grupo">
+            <label for="aLugar">Lugar</label>
+            <input type="text" id="aLugar" placeholder="p.ej. Aula de Formación, Virtual…">
+          </div>
+          <!-- Horas lectivas -->
+          <div class="campo-grupo">
+            <label for="aHoras">Horas lectivas</label>
+            <input type="text" id="aHoras" placeholder="p.ej. 5 horas">
+          </div>
+          <!-- Plazas -->
+          <div class="campo-grupo">
+            <label for="aPlazas">Plazas</label>
+            <input type="text" id="aPlazas" placeholder="p.ej. 30 plazas">
+          </div>
+          <!-- Créditos -->
+          <div class="campo-grupo">
+            <label for="aCreditos">Créditos</label>
+            <input type="text" id="aCreditos" placeholder="p.ej. 1.5 cr">
+          </div>
+          <!-- Subtema / Categoría interna -->
+          <div class="campo-grupo">
+            <label for="aCategoria">Subtema / Categoría interna</label>
+            <input type="text" id="aCategoria" placeholder="p.ej. Tabaquismo, Vacunación…">
+          </div>
+          <!-- Enlace -->
+          <div class="campo-grupo full">
+            <label for="aEnlace">URL de inscripción</label>
+            <input type="url" id="aEnlace" placeholder="https://…">
+          </div>
+          <!-- Descripción -->
+          <div class="campo-grupo full">
+            <label for="aDesc">Descripción</label>
+            <textarea id="aDesc" placeholder="Descripción breve de la actividad formativa…"></textarea>
+          </div>
+        </div>
+        <div id="errAdmin" class="error-login"></div>
+        <button class="btn-admin verde" onclick="agregarCurso()">✚ Agregar Curso</button>
+      </div>
+    </div>
+
+    <!-- ── NOTIFICACIÓN TOAST ── -->
+    <div class="notif-toast" id="notifToast"></div>
 
     <section class="panel">
       <nav class="tabs" aria-label="Categorías de formación">
@@ -1607,7 +2015,6 @@
     const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
     const mesesCorto = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
     let fcal = new Date(2026, 4, 1);
-    const hoy = new Date();
 
     function pf(s) {
       if (!s) return null;
@@ -1638,6 +2045,7 @@
     function fb(s) {
       const d = pf(s);
       if (!d) return '-';
+      const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       const d_date = new Date(d.getFullYear(), d.getMonth(), d.getDate());
       const diffTime = d_date - h;
@@ -1670,6 +2078,7 @@
     }
 
     function insc(c) {
+      if (esPasado(c)) return '-';
       if (c.inscripcionTexto) return c.inscripcionTexto;
       if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') return 'Inscripción abierta';
       if (c.inscripcionAbierta) return 'Inscripción abierta';
@@ -1680,6 +2089,14 @@
     }
 
     function estado(c) {
+      if (esPasado(c)) return { t: 'Finalizado / cerrado', cl: 'cerrada' };
+      
+      const hoy = new Date();
+      const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+      const i = pf(c.fechaInscripcionInicio);
+      const f = pf(c.fechaInscripcionFin);
+      const ini = pf(c.fechaInicio);
+
       if (c.estadoTexto) return { t: c.estadoTexto, cl: c.estadoClase || 'abierta' };
       if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') {
         return { t: 'Inscripción abierta', cl: 'abierta' };
@@ -1696,11 +2113,6 @@
       if (!c.fechaInscripcionInicio && !c.fechaInscripcionFin) {
         return { t: 'Sin inscripción online', cl: 'sininscripcion' };
       }
-
-      const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-      const i = pf(c.fechaInscripcionInicio);
-      const f = pf(c.fechaInscripcionFin);
-      const ini = pf(c.fechaInicio);
 
       if (i && f && h >= i && h <= f) return { t: 'Inscripción abierta', cl: 'abierta' };
       if (!i && f && h <= f) return { t: 'Inscripción abierta hasta ' + fb(c.fechaInscripcionFin), cl: 'abierta' };
@@ -1811,6 +2223,7 @@
 
       const modo = document.getElementById('modoCal').value;
       const r = filtra();
+      const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       let html = '';
 
@@ -1861,6 +2274,7 @@
 
     function destacadas() {
       const cont = document.getElementById('proximasGrid');
+      const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
 
       let prox = cursos
@@ -1950,6 +2364,166 @@
     };
 
     pinta();
+
+    /* ══════════════════════════════════════════
+       ZONA PRIVADA — Lógica de administración
+    ══════════════════════════════════════════ */
+
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'agrosana11N20A.';
+    let adminAutenticado = false;
+
+    function abrirLogin() {
+      if (adminAutenticado) {
+        abrirAdmin();
+        return;
+      }
+      document.getElementById('loginUsuario').value = '';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('errorLogin').style.display = 'none';
+      document.getElementById('modalLogin').classList.add('abierto');
+      setTimeout(() => document.getElementById('loginUsuario').focus(), 100);
+    }
+
+    function cerrarLogin() {
+      document.getElementById('modalLogin').classList.remove('abierto');
+    }
+
+    function abrirAdmin() {
+      document.getElementById('modalAdmin').classList.add('abierto');
+      document.getElementById('errAdmin').style.display = 'none';
+    }
+
+    function cerrarAdmin() {
+      document.getElementById('modalAdmin').classList.remove('abierto');
+    }
+
+    function intentarLogin() {
+      const u = document.getElementById('loginUsuario').value.trim();
+      const p = document.getElementById('loginPass').value;
+      if (u === ADMIN_USER && p === ADMIN_PASS) {
+        adminAutenticado = true;
+        cerrarLogin();
+        // Actualizar botón para indicar sesión activa
+        const btn = document.getElementById('btnZonaPrivada');
+        btn.style.background = 'rgba(22,163,74,.18)';
+        btn.style.borderColor = 'rgba(22,163,74,.5)';
+        btn.style.color = '#86efac';
+        btn.innerHTML = '<span class="lock-icon">🔓</span> Zona Privada';
+        abrirAdmin();
+      } else {
+        const err = document.getElementById('errorLogin');
+        err.style.display = 'block';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginPass').focus();
+      }
+    }
+
+    // Permitir Enter en los campos de login
+    ['loginUsuario', 'loginPass'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') intentarLogin();
+      });
+    });
+
+    // Cerrar modal al hacer clic en el overlay
+    document.getElementById('modalLogin').addEventListener('click', function (e) {
+      if (e.target === this) cerrarLogin();
+    });
+    document.getElementById('modalAdmin').addEventListener('click', function (e) {
+      if (e.target === this) cerrarAdmin();
+    });
+
+    function mostrarToast(msg, color) {
+      const t = document.getElementById('notifToast');
+      t.textContent = msg;
+      t.style.background = color || '#16a34a';
+      t.classList.add('visible');
+      setTimeout(() => t.classList.remove('visible'), 3800);
+    }
+
+    function generarId() {
+      return 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+    }
+
+    function v(id) {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      return el.value.trim();
+    }
+
+    function agregarCurso() {
+      const titulo = v('aTitle');
+      const fechaInicio = v('aFIni');
+      const area = v('aArea');
+
+      const errEl = document.getElementById('errAdmin');
+      if (!titulo) {
+        errEl.textContent = 'El título es obligatorio.';
+        errEl.style.display = 'block';
+        document.getElementById('aTitle').focus();
+        return;
+      }
+      if (!fechaInicio) {
+        errEl.textContent = 'La fecha de inicio es obligatoria.';
+        errEl.style.display = 'block';
+        document.getElementById('aFIni').focus();
+        return;
+      }
+      errEl.style.display = 'none';
+
+      const nuevoCurso = {
+        id: generarId(),
+        titulo: titulo,
+        area: area,
+        entidad: v('aEntidad') || '-',
+        dirigidoA: v('aDirigido') || '-',
+        plazas: v('aPlazas') || '-',
+        fechaInscripcionInicio: v('aFInsIni') || '',
+        fechaInscripcionFin: v('aFInsFin') || '',
+        fechaInicio: fechaInicio,
+        fechaFin: v('aFFin') || fechaInicio,
+        hora: v('aHora') || '',
+        lugar: v('aLugar') || '-',
+        horas: v('aHoras') || '-',
+        creditos: v('aCreditos') || '-',
+        categoria: v('aCategoria') || '-',
+        modalidad: v('aModalidad') || '-',
+        enlace: v('aEnlace') || '',
+        descripcion: v('aDesc') || '-'
+      };
+
+      // Añadir al array global
+      cursos.push(nuevoCurso);
+
+      // Refrescar toda la web
+      pinta();
+
+      // Limpiar formulario
+      ['aTitle', 'aEntidad', 'aDirigido', 'aPlazas', 'aFInsIni', 'aFInsFin', 'aFIni', 'aFFin',
+        'aHora', 'aLugar', 'aHoras', 'aCreditos', 'aCategoria', 'aEnlace', 'aDesc'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+      document.getElementById('aArea').value = 'Gesforma';
+      document.getElementById('aModalidad').value = 'Virtual';
+
+      cerrarAdmin();
+
+      // Hacer scroll al curso si el área coincide con el filtro activo
+      const areaActual = document.getElementById('fArea').value;
+      if (areaActual !== 'Todas' && areaActual !== area) {
+        syncArea('Todas');
+      }
+
+      mostrarToast('✓ Curso "' + titulo.slice(0, 40) + (titulo.length > 40 ? '…' : '') + '" añadido correctamente', '#16a34a');
+
+      // Scroll al curso recién añadido
+      setTimeout(() => {
+        const el = document.getElementById(nuevoCurso.id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 400);
+    }
 
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('btnSubir');
