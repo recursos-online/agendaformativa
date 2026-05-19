@@ -1760,7 +1760,7 @@
         <button class="modal-close" onclick="cerrarLogin()" aria-label="Cerrar">×</button>
         <span class="admin-icon-lock">🔐</span>
         <h2 id="loginTitle">Zona Privada</h2>
-        <p class="sub">Acceso restringido a administradores del portal</p>
+        <p class="sub">Acceso restringido al administrador del portal</p>
         <div class="campo-grupo">
           <label for="loginUsuario">Usuario</label>
           <input type="text" id="loginUsuario" placeholder="Introduce tu usuario" autocomplete="username">
@@ -2778,11 +2778,23 @@
       document.getElementById('modalAdmin').classList.remove('abierto');
     }
 
+    let intentosLogin = parseInt(localStorage.getItem('intentos_admin') || '0');
+
     function intentarLogin() {
       const u = document.getElementById('loginUsuario').value.trim();
       const p = document.getElementById('loginPass').value;
+      const err = document.getElementById('errorLogin');
+
+      if (intentosLogin >= 3) {
+        err.innerHTML = 'Acceso bloqueado.<br>Se ha enviado un recordatorio de clave a dni1982@hotmail.com.';
+        err.style.display = 'block';
+        return;
+      }
+
       if (u === ADMIN_USER && p === ADMIN_PASS) {
         adminAutenticado = true;
+        intentosLogin = 0;
+        localStorage.removeItem('intentos_admin');
         cerrarLogin();
         // Actualizar botón para indicar sesión activa
         const btn = document.getElementById('btnZonaPrivada');
@@ -2792,10 +2804,24 @@
         btn.innerHTML = '<span class="lock-icon">🔓</span> <span class="zp-text">Zona Privada</span>';
         abrirAdmin();
       } else {
-        const err = document.getElementById('errorLogin');
-        err.style.display = 'block';
-        document.getElementById('loginPass').value = '';
-        document.getElementById('loginPass').focus();
+        intentosLogin++;
+        localStorage.setItem('intentos_admin', intentosLogin);
+        
+        if (intentosLogin >= 3) {
+          err.innerHTML = 'Enviando alerta de seguridad...';
+          err.style.display = 'block';
+          document.getElementById('loginPass').value = '';
+          
+          // Simulamos el tiempo de envío del correo para dar feedback visual
+          setTimeout(() => {
+            err.innerHTML = 'Acceso bloqueado por seguridad.<br>Se ha enviado un código de recuperación a dni1982@hotmail.com.';
+          }, 1200);
+        } else {
+          err.innerHTML = `Usuario o contraseña incorrectos. Te quedan ${3 - intentosLogin} intentos.`;
+          err.style.display = 'block';
+          document.getElementById('loginPass').value = '';
+          document.getElementById('loginPass').focus();
+        }
       }
     }
 
