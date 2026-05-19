@@ -2786,7 +2786,7 @@
       const err = document.getElementById('errorLogin');
 
       if (intentosLogin >= 3) {
-        err.innerHTML = 'Acceso bloqueado.<br>Se ha enviado un recordatorio de clave a dni1982@hotmail.com.';
+        err.innerHTML = 'Nada, intentalo mejor con la Lotería de Navidad.<br>Si quieres volver a probar, revisa tu correo electrónico cabeza hueca.';
         err.style.display = 'block';
         return;
       }
@@ -2814,10 +2814,15 @@
           
           // Simulamos el tiempo de envío del correo para dar feedback visual
           setTimeout(() => {
-            err.innerHTML = 'Acceso bloqueado por seguridad.<br>Se ha enviado un código de recuperación a dni1982@hotmail.com.';
+            err.innerHTML = 'Nada, intentalo mejor con la Lotería de Navidad.<br>Si quieres volver a probar, revisa tu correo electrónico cabeza hueca.';
           }, 1200);
+        } else if (intentosLogin === 2) {
+          err.innerHTML = 'Eyy!! que te estoy observando!! Cuidado con lo que haces.';
+          err.style.display = 'block';
+          document.getElementById('loginPass').value = '';
+          document.getElementById('loginPass').focus();
         } else {
-          err.innerHTML = `Usuario o contraseña incorrectos. Te quedan ${3 - intentosLogin} intentos.`;
+          err.innerHTML = 'oye! ¿no te estarás metiendo donde no debes?';
           err.style.display = 'block';
           document.getElementById('loginPass').value = '';
           document.getElementById('loginPass').focus();
