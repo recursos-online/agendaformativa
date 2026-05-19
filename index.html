@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
+<html lang="es"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actividades Formativas · Centro de Salud Tiro de Pichón</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap');
 
@@ -1741,10 +1737,7 @@
       <div class="hero-contenido">
         <div style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
           <div class="chip-top" style="margin-bottom:0">🩺 Formación para profesionales</div>
-          <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración"
-            onclick="abrirLogin()">
-            <span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span>
-          </button>
+          <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración" onclick="abrirLogin()"><span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span></button>
         </div>
         <h1>Agenda Formativa</h1>
         <div class="subtitulo-hero">Centro de Salud Tiro de Pichón</div>
@@ -1753,10 +1746,10 @@
         </p>
 
         <div class="resumen">
-          <div><strong id="total">0</strong><span>Actividades cargadas</span></div>
-          <div><strong id="abiertas">0</strong><span>Inscripciones abiertas</span></div>
-          <div><strong id="proximos">0</strong><span>Inicios proximos</span></div>
-          <div><strong id="centro">0</strong><span>Sesiones en el centro</span></div>
+          <div><strong id="total">17</strong><span>Actividades cargadas</span></div>
+          <div><strong id="abiertas">5</strong><span>Inscripciones abiertas</span></div>
+          <div><strong id="proximos">5</strong><span>Inicios proximos</span></div>
+          <div><strong id="centro">4</strong><span>Sesiones en el centro</span></div>
         </div>
       </div>
     </header>
@@ -1776,7 +1769,7 @@
           <label for="loginPass">Contraseña</label>
           <input type="password" id="loginPass" placeholder="Introduce tu contraseña" autocomplete="current-password">
         </div>
-        <div class="error-login" id="errorLogin">Usuario o contraseña incorrectos. Inténtalo de nuevo.</div>
+        <div class="error-login" id="errorLogin" style="display: none;">Usuario o contraseña incorrectos. Inténtalo de nuevo.</div>
         <button class="btn-admin primario" id="btnEntrar" onclick="intentarLogin()">Entrar</button>
       </div>
     </div>
@@ -1889,7 +1882,7 @@
             <textarea id="aDesc" placeholder="Descripción breve de la actividad formativa…"></textarea>
           </div>
         </div>
-        <div id="errAdmin" class="error-login"></div>
+        <div id="errAdmin" class="error-login" style="display: none;"></div>
         <div class="admin-actions">
           <button class="btn-admin verde" onclick="agregarCurso()">✚ Agregar Curso</button>
           <button class="btn-admin azul" onclick="descargarHTML()">⬇️ Descargar HTML</button>
@@ -1898,7 +1891,7 @@
     </div>
 
     <!-- ── NOTIFICACIÓN TOAST ── -->
-    <div class="notif-toast" id="notifToast"></div>
+    <div class="notif-toast" id="notifToast" style="background: rgb(22, 163, 74);">✓ Curso "Gestión de eventos adversos graves: Aten…" añadido correctamente</div>
 
     <section class="panel">
       <nav class="tabs" aria-label="Categorías de formación">
@@ -1908,8 +1901,7 @@
         <button class="tab" data-area="Sesiones en el Centro"><span class="icono">🏥</span> Sesiones en el
           centro</button>
         <button class="tab" data-area="Otros"><span class="icono">🧩</span> Otros cursos o eventos</button>
-        <button class="tab" data-area="Calendario"
-          style="background:#e8f0f7; border-color:#cbd5e1; color:#1e293b;"><span class="icono">📅</span> Ir al
+        <button class="tab" data-area="Calendario" style="background:#e8f0f7; border-color:#cbd5e1; color:#1e293b;"><span class="icono">📅</span> Ir al
           Calendario</button>
 
       </nav>
@@ -1951,7 +1943,7 @@
         <main>
           <div class="titulo-linea">
             <h2 id="titLista">Todas las actividades</h2>
-            <span class="contador" id="contador">0 resultados</span>
+            <span class="contador" id="contador">16 resultados</span>
           </div>
           <div class="lista" id="lista"></div>
         </main>
@@ -1971,7 +1963,7 @@
           </select>
           <div class="cal-head">
             <button id="prev" aria-label="Mes anterior">‹</button>
-            <h2 id="mes">Calendario</h2>
+            <h2 id="mes">MAYO 2026</h2>
             <button id="next" aria-label="Mes siguiente">›</button>
           </div>
 
@@ -2007,38 +1999,360 @@
       Desarrollada por Daniel Fernandez Sanchez
     </footer>
 
-    <button id="btnSubir" class="btn-subir" aria-label="Volver arriba"
-      onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 15l-6-6-6 6" />
+    <button id="btnSubir" class="btn-subir" aria-label="Volver arriba" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"></path>
       </svg>
     </button>
   </div>
 
   <script>
     let cursos = [
-      { id: 'g1', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 1ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-05-05', fechaInscripcionFin: '2026-05-18', fechaInicio: '2026-05-19', fechaFin: '2026-06-08', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g2', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 2ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-05-19', fechaInscripcionFin: '2026-06-08', fechaInicio: '2026-06-09', fechaFin: '2026-06-29', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g3', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 3ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-06-09', fechaInscripcionFin: '2026-07-13', fechaInicio: '2026-07-14', fechaFin: '2026-08-03', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g4', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 4ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-07-14', fechaInscripcionFin: '2026-08-10', fechaInicio: '2026-08-11', fechaFin: '2026-08-31', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g5', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 5ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-08-11', fechaInscripcionFin: '2026-09-14', fechaInicio: '2026-09-15', fechaFin: '2026-10-05', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g6', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 6ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-09-15', fechaInscripcionFin: '2026-10-12', fechaInicio: '2026-10-13', fechaFin: '2026-11-02', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-      { id: 'g7', titulo: 'Plan de Igualdad del Servicio Andaluz de Salud · 7ª edición', area: 'Gesforma', entidad: 'Unidad de Formación Servicios Centrales SAS', dirigidoA: 'Todas las categorías', plazas: '9999 plazas', fechaInscripcionInicio: '2026-10-13', fechaInscripcionFin: '2026-11-16', fechaInicio: '2026-11-17', fechaFin: '2026-12-07', hora: '', lugar: 'Virtual / Gesforma', horas: '2 horas', creditos: '-', categoria: 'Igualdad', modalidad: 'Inscripción', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281', descripcion: 'Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud.' },
-
-      { id: 'p65', titulo: 'Píldora 65 · Atención sanitaria en residencias: del modelo a la práctica clínica', area: 'Sesiones en el Centro', entidad: 'Distrito Sanitario Málaga-Guadalhorce', dirigidoA: 'Profesionales del centro', plazas: '-', fechaInscripcionInicio: '', fechaInscripcionFin: '', fechaInicio: '2026-05-27', fechaFin: '2026-05-27', hora: '14:00', lugar: 'Aula de Formación', horas: 'No indicado', creditos: 'No aplica', categoria: 'Residencias', modalidad: 'Presencial', enlace: '', descripcion: 'D. Carlos de los Ríos Jaime, Enfermera Gestora de Casos de la Unidad de Residencias de Mayores, y Dr. Higinio Flores Tirado, Médico de Familia de URM para la Zona Hospital Regional Universitario de Málaga.' },
-      { id: 'rasselh', titulo: 'Sesión de Formación RASSELH', area: 'Sesiones en el Centro', entidad: 'Centro de Salud Tiro de Pichón', dirigidoA: 'Profesionales del centro', plazas: '-', fechaInscripcionInicio: '', fechaInscripcionFin: '', fechaInicio: '2026-06-04', fechaFin: '2026-06-04', hora: '14:00', lugar: 'Aula de Formación', horas: 'No indicado', creditos: 'No aplica', categoria: 'Formación interna', modalidad: 'Presencial', enlace: '', descripcion: 'Sesión formativa interna presencial sobre RASSELH.' },
-      { id: 'p66', titulo: 'Píldora 66 · Andalucía se vacuna a lo largo de toda la vida', area: 'Sesiones en el Centro', entidad: 'Distrito Sanitario Málaga-Guadalhorce', dirigidoA: 'Profesionales del centro', plazas: '-', fechaInscripcionInicio: '', fechaInscripcionFin: '', fechaInicio: '2026-06-09', fechaFin: '2026-06-09', hora: '14:00', lugar: 'Aula de Formación', horas: 'No indicado', creditos: 'No aplica', categoria: 'Vacunación', modalidad: 'Presencial', enlace: '', descripcion: 'María José Ortega Belmonte. Epidemiología del Distrito Sanitario Málaga.' },
-      { id: 'p67', titulo: 'Píldora 67 · Farmacología para quedarse sin amigos: cuando la mitad de 2 no es 1 ni el doble es 4', area: 'Sesiones en el Centro', entidad: 'Distrito Sanitario Málaga-Guadalhorce', dirigidoA: 'Profesionales del centro', plazas: '-', fechaInscripcionInicio: '', fechaInscripcionFin: '', fechaInicio: '2026-06-24', fechaFin: '2026-06-24', hora: '14:00', lugar: 'Aula de Formación', horas: 'No indicado', creditos: 'No aplica', categoria: 'Farmacología', modalidad: 'Presencial', enlace: '', descripcion: 'Rafael Páez Valle. Farmacéutico de Atención Primaria del Distrito Sanitario Málaga-Guadalhorce.' },
-
-      { id: 'easp-cuello', titulo: 'Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía (PDPCCU)', area: 'EASP', entidad: 'Escuela Andaluza de Salud Pública', dirigidoA: 'Medicina y Enfermería de Atención Primaria, Ginecología, epidemiólogos, coordinadores de Distritos Sanitarios y profesionales implicados en el PDPCCU.', plazas: 'No indicado', fechaInscripcionInicio: '', fechaInscripcionFin: '2026-05-12', fechaInicio: '2026-06-01', fechaFin: '2026-07-03', hora: '', lugar: 'Virtual', horas: '20 horas', creditos: 'No indicado', categoria: 'Cribado / cáncer de cuello de útero', modalidad: 'Virtual', enlace: 'https://www.easp.ws/cuello26w', descripcion: 'Curso virtual sobre el Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía. Límite de inscripción: 12 de mayo.' },
-
-      { id: 'desayuno-abs', titulo: 'Desayuno formativo', area: 'Otros', entidad: 'ABS · Juan Antonio', dirigidoA: 'Profesionales invitados', plazas: 'No indicado', fechaInscripcionInicio: '', fechaInscripcionFin: '', fechaInicio: '2026-05-15', fechaFin: '2026-05-15', hora: '09:30', lugar: 'La Salud', horas: 'No indicado', creditos: 'No aplica', categoria: 'Desayuno formativo', modalidad: 'Presencial', enlace: '', descripcion: 'Desayuno formativo este viernes a las 9:30 h, invitados por Juan Antonio, representante de ABS.' },
-
-      { id: 'easp-contenciones-2026', titulo: 'Buenas prácticas en la prevención y uso de contenciones', area: 'EASP', entidad: 'Escuela Andaluza de Salud Pública', dirigidoA: 'Profesionales sanitarios, con atención directa a pacientes, de atención primaria y hospitalaria en el SAS que actualmente desarrollen su actividad en el Sistema Sanitario Público Andaluz.', plazas: 'No indicado', fechaInscripcionInicio: '', fechaInscripcionFin: '', inscripcionTexto: 'Inscripción abierta', estadoTexto: 'Inscripción abierta', estadoClase: 'abierta', fechaInicio: '2026-09-21', fechaFin: '2026-10-22', hora: '', lugar: 'Virtual', horas: 'No indicado', creditos: 'No indicado', categoria: 'Contenciones / buenas prácticas', modalidad: 'Virtual', enlace: 'https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=YEhHegs8LlUsJBt%2bWSMuuMmlKX3X3BylONt4%2f6qQmYI%3d', inscripcionAbierta: true, descripcion: 'Curso virtual de la EASP sobre buenas prácticas en la prevención y uso de contenciones. Requisitos indicados: informe favorable del centro de pertenencia y contrato en vigor durante la actividad formativa.' },
-
-      { id: 'gesforma-tabaquismo-basica-2026', titulo: 'Intervención Básica en Tabaquismo', area: 'Gesforma', entidad: 'Gesforma Servicios Centrales SAS', dirigidoA: 'Enfermería y médicos', plazas: 'No indicado', fechaInscripcionInicio: '', fechaInscripcionFin: '2026-05-31', fechaInicio: '2026-06-01', fechaFin: '', hora: '', lugar: 'Virtual / Gesforma', horas: '5 horas', creditos: 'No indicado', categoria: 'Tabaquismo', modalidad: 'Virtual', enlace: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesformafaces/index.xhtml', descripcion: 'Curso virtual de Intervención Básica en Tabaquismo, dirigido a profesionales de Enfermería y Medicina. Inscripción hasta el 31 de mayo.' }
-    ];
+      {
+            id: "g1",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 1ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-05-05",
+            fechaInscripcionFin: "2026-05-18",
+            fechaInicio: "2026-05-19",
+            fechaFin: "2026-06-08",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g2",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 2ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-05-19",
+            fechaInscripcionFin: "2026-06-08",
+            fechaInicio: "2026-06-09",
+            fechaFin: "2026-06-29",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g3",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 3ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-06-09",
+            fechaInscripcionFin: "2026-07-13",
+            fechaInicio: "2026-07-14",
+            fechaFin: "2026-08-03",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g4",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 4ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-07-14",
+            fechaInscripcionFin: "2026-08-10",
+            fechaInicio: "2026-08-11",
+            fechaFin: "2026-08-31",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g5",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 5ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-08-11",
+            fechaInscripcionFin: "2026-09-14",
+            fechaInicio: "2026-09-15",
+            fechaFin: "2026-10-05",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g6",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 6ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-09-15",
+            fechaInscripcionFin: "2026-10-12",
+            fechaInicio: "2026-10-13",
+            fechaFin: "2026-11-02",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "g7",
+            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 7ª edición",
+            area: "Gesforma",
+            entidad: "Unidad de Formación Servicios Centrales SAS",
+            dirigidoA: "Todas las categorías",
+            plazas: "9999 plazas",
+            fechaInscripcionInicio: "2026-10-13",
+            fechaInscripcionFin: "2026-11-16",
+            fechaInicio: "2026-11-17",
+            fechaFin: "2026-12-07",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "2 horas",
+            creditos: "-",
+            categoria: "Igualdad",
+            modalidad: "Inscripción",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
+            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
+      },
+      {
+            id: "p65",
+            titulo: "Píldora 65 · Atención sanitaria en residencias: del modelo a la práctica clínica",
+            area: "Sesiones en el Centro",
+            entidad: "Distrito Sanitario Málaga-Guadalhorce",
+            dirigidoA: "Profesionales del centro",
+            plazas: "-",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            fechaInicio: "2026-05-27",
+            fechaFin: "2026-05-27",
+            hora: "14:00",
+            lugar: "Aula de Formación",
+            horas: "No indicado",
+            creditos: "No aplica",
+            categoria: "Residencias",
+            modalidad: "Presencial",
+            enlace: "",
+            descripcion: "D. Carlos de los Ríos Jaime, Enfermera Gestora de Casos de la Unidad de Residencias de Mayores, y Dr. Higinio Flores Tirado, Médico de Familia de URM para la Zona Hospital Regional Universitario de Málaga."
+      },
+      {
+            id: "rasselh",
+            titulo: "Sesión de Formación RASSELH",
+            area: "Sesiones en el Centro",
+            entidad: "Centro de Salud Tiro de Pichón",
+            dirigidoA: "Profesionales del centro",
+            plazas: "-",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            fechaInicio: "2026-06-04",
+            fechaFin: "2026-06-04",
+            hora: "14:00",
+            lugar: "Aula de Formación",
+            horas: "No indicado",
+            creditos: "No aplica",
+            categoria: "Formación interna",
+            modalidad: "Presencial",
+            enlace: "",
+            descripcion: "Sesión formativa interna presencial sobre RASSELH."
+      },
+      {
+            id: "p66",
+            titulo: "Píldora 66 · Andalucía se vacuna a lo largo de toda la vida",
+            area: "Sesiones en el Centro",
+            entidad: "Distrito Sanitario Málaga-Guadalhorce",
+            dirigidoA: "Profesionales del centro",
+            plazas: "-",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            fechaInicio: "2026-06-09",
+            fechaFin: "2026-06-09",
+            hora: "14:00",
+            lugar: "Aula de Formación",
+            horas: "No indicado",
+            creditos: "No aplica",
+            categoria: "Vacunación",
+            modalidad: "Presencial",
+            enlace: "",
+            descripcion: "María José Ortega Belmonte. Epidemiología del Distrito Sanitario Málaga."
+      },
+      {
+            id: "p67",
+            titulo: "Píldora 67 · Farmacología para quedarse sin amigos: cuando la mitad de 2 no es 1 ni el doble es 4",
+            area: "Sesiones en el Centro",
+            entidad: "Distrito Sanitario Málaga-Guadalhorce",
+            dirigidoA: "Profesionales del centro",
+            plazas: "-",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            fechaInicio: "2026-06-24",
+            fechaFin: "2026-06-24",
+            hora: "14:00",
+            lugar: "Aula de Formación",
+            horas: "No indicado",
+            creditos: "No aplica",
+            categoria: "Farmacología",
+            modalidad: "Presencial",
+            enlace: "",
+            descripcion: "Rafael Páez Valle. Farmacéutico de Atención Primaria del Distrito Sanitario Málaga-Guadalhorce."
+      },
+      {
+            id: "easp-cuello",
+            titulo: "Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía (PDPCCU)",
+            area: "EASP",
+            entidad: "Escuela Andaluza de Salud Pública",
+            dirigidoA: "Medicina y Enfermería de Atención Primaria, Ginecología, epidemiólogos, coordinadores de Distritos Sanitarios y profesionales implicados en el PDPCCU.",
+            plazas: "No indicado",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "2026-05-12",
+            fechaInicio: "2026-06-01",
+            fechaFin: "2026-07-03",
+            hora: "",
+            lugar: "Virtual",
+            horas: "20 horas",
+            creditos: "No indicado",
+            categoria: "Cribado / cáncer de cuello de útero",
+            modalidad: "Virtual",
+            enlace: "https://www.easp.ws/cuello26w",
+            descripcion: "Curso virtual sobre el Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía. Límite de inscripción: 12 de mayo."
+      },
+      {
+            id: "desayuno-abs",
+            titulo: "Desayuno formativo",
+            area: "Otros",
+            entidad: "ABS · Juan Antonio",
+            dirigidoA: "Profesionales invitados",
+            plazas: "No indicado",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            fechaInicio: "2026-05-15",
+            fechaFin: "2026-05-15",
+            hora: "09:30",
+            lugar: "La Salud",
+            horas: "No indicado",
+            creditos: "No aplica",
+            categoria: "Desayuno formativo",
+            modalidad: "Presencial",
+            enlace: "",
+            descripcion: "Desayuno formativo este viernes a las 9:30 h, invitados por Juan Antonio, representante de ABS."
+      },
+      {
+            id: "easp-contenciones-2026",
+            titulo: "Buenas prácticas en la prevención y uso de contenciones",
+            area: "EASP",
+            entidad: "Escuela Andaluza de Salud Pública",
+            dirigidoA: "Profesionales sanitarios, con atención directa a pacientes, de atención primaria y hospitalaria en el SAS que actualmente desarrollen su actividad en el Sistema Sanitario Público Andaluz.",
+            plazas: "No indicado",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "",
+            inscripcionTexto: "Inscripción abierta",
+            estadoTexto: "Inscripción abierta",
+            estadoClase: "abierta",
+            fechaInicio: "2026-09-21",
+            fechaFin: "2026-10-22",
+            hora: "",
+            lugar: "Virtual",
+            horas: "No indicado",
+            creditos: "No indicado",
+            categoria: "Contenciones / buenas prácticas",
+            modalidad: "Virtual",
+            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=YEhHegs8LlUsJBt%2bWSMuuMmlKX3X3BylONt4%2f6qQmYI%3d",
+            inscripcionAbierta: true,
+            descripcion: "Curso virtual de la EASP sobre buenas prácticas en la prevención y uso de contenciones. Requisitos indicados: informe favorable del centro de pertenencia y contrato en vigor durante la actividad formativa."
+      },
+      {
+            id: "gesforma-tabaquismo-basica-2026",
+            titulo: "Intervención Básica en Tabaquismo",
+            area: "Gesforma",
+            entidad: "Gesforma Servicios Centrales SAS",
+            dirigidoA: "Enfermería y médicos",
+            plazas: "No indicado",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "2026-05-31",
+            fechaInicio: "2026-06-01",
+            fechaFin: "",
+            hora: "",
+            lugar: "Virtual / Gesforma",
+            horas: "5 horas",
+            creditos: "No indicado",
+            categoria: "Tabaquismo",
+            modalidad: "Virtual",
+            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesformafaces/index.xhtml",
+            descripcion: "Curso virtual de Intervención Básica en Tabaquismo, dirigido a profesionales de Enfermería y Medicina. Inscripción hasta el 31 de mayo."
+      },
+      {
+            id: "custom-1779217409634-uoja4",
+            titulo: "Prescripción Independiente",
+            area: "EASP",
+            entidad: "EASP",
+            dirigidoA: "Enfermeras/os del SSPA.",
+            plazas: "-",
+            fechaInscripcionInicio: "2026-01-01",
+            fechaInscripcionFin: "2026-12-15",
+            fechaInicio: "2026-01-14",
+            fechaFin: "2026-12-30",
+            hora: "",
+            lugar: "Virtual",
+            horas: "3",
+            creditos: "-",
+            categoria: "-",
+            modalidad: "Virtual",
+            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=eyJpdiI6InArVVN5enpraFpDYS9xdXZUSnhONXc9PSIsInZhbHVlIjoiVjl3RmhLRVpKc0J3UDF3U2lXRkVVdz09IiwibWFjIjoiNmY4MGUzZTk0N2M0NTBkYTFhYzM0M2NjOWNkMDBmNzUwMDA2N2RjNjFlYmQ4MWM0ZTJkNDM1ZWVmYWZhNmYwZSIsInRhZyI6IiJ9",
+            descripcion: "Garantizar las competencias necesarias para la obtención del perfil de enfermera acreditada."
+      },
+      {
+            id: "custom-1779217494964-xgbxx",
+            titulo: "Gestión de eventos adversos graves: Atención a la primera, segunda y tercera víctima",
+            area: "EASP",
+            entidad: "EASP",
+            dirigidoA: "Profesionales sanitarios, con atención directa a pacientes, de atención primaria y hospitalaria que actualmente desarrollen su actividad en el Sistema Sanitario Público Andaluz.",
+            plazas: "-",
+            fechaInscripcionInicio: "",
+            fechaInscripcionFin: "2026-06-10",
+            fechaInicio: "2026-06-25",
+            fechaFin: "2026-07-22",
+            hora: "",
+            lugar: "Virtual",
+            horas: "10",
+            creditos: "-",
+            categoria: "-",
+            modalidad: "Virtual",
+            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=eyJpdiI6IndXOTVrYklLbzB0TVg3ZngxbDg3eXc9PSIsInZhbHVlIjoiRnBML1RnRkhBczNoR0hTR1hDeHlidz09IiwibWFjIjoiYzQ0MGIzNzlmNWY0YzNiNTI4MDBjMjI2NGY5ZmM1ODM2YTQ1YWNkNmQwYmRiMTE5OGNhODI5MDc5MGI5YmEyMCIsInRhZyI6IiJ9",
+            descripcion: "Conocer las herramientas necesarias para actuar ante un Evento Adverso Grave (EAG) o Evento Centinela (EC), utilizando un enfoque sistémico que abarca a las tres figuras afectadas: el paciente (1ª víctima), el profesional (2ª víctima) y la institución (3ª víctima)."
+      }
+];
 
     try {
       const guardados = localStorage.getItem('cursos_agenda');
@@ -2667,6 +2981,6 @@
       }
     });
   </script>
-</body>
 
-</html>
+
+</body></html>
