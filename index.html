@@ -1324,6 +1324,55 @@
       font-family: 'Outfit', sans-serif;
     }
 
+    
+    .btn-admin-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .btn-admin-add {
+      background: rgba(124, 58, 237, .1);
+      border: 1px solid rgba(124, 58, 237, .3);
+      color: #6d28d9;
+    }
+    .btn-admin-add:hover {
+      background: rgba(124, 58, 237, .2);
+      border-color: rgba(124, 58, 237, .5);
+      color: #4c1d95;
+    }
+
+    .btn-admin-edit {
+      background: rgba(217, 119, 6, .1);
+      border: 1px solid rgba(217, 119, 6, .3);
+      color: #b45309;
+    }
+    .btn-admin-edit:hover {
+      background: rgba(217, 119, 6, .2);
+      border-color: rgba(217, 119, 6, .5);
+      color: #78350f;
+    }
+
+    .btn-admin-del {
+      background: rgba(220, 38, 38, .1);
+      border: 1px solid rgba(220, 38, 38, .3);
+      color: #b91c1c;
+    }
+    .btn-admin-del:hover {
+      background: rgba(220, 38, 38, .2);
+      border-color: rgba(220, 38, 38, .5);
+      color: #7f1d1d;
+    }
+
     .zona-privada-btn:hover {
       background: rgba(220, 38, 38, .28);
       border-color: rgba(220, 38, 38, .7);
@@ -1729,7 +1778,7 @@
       }
     }
   </style>
-</head>
+  </head>
 
 <body>
   <div class="pagina">
@@ -1738,6 +1787,7 @@
         <div style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;">
           <div class="chip-top" style="margin-bottom:0">🩺 Formación para profesionales</div>
           <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración" onclick="abrirLogin()"><span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span></button>
+          <button id="btnAddAdmin" class="btn-admin-action btn-admin-add" style="display:none; margin-left:10px;" onclick="abrirAdmin()" aria-label="Añadir Curso">➕ <span class="zp-text">Añadir Curso</span></button>
         </div>
         <h1>Agenda Formativa</h1>
         <div class="subtitulo-hero">Centro de Salud Tiro de Pichón</div>
@@ -1883,9 +1933,8 @@
           </div>
         </div>
         <div id="errAdmin" class="error-login" style="display: none;"></div>
-        <div class="admin-actions">
-          <button class="btn-admin verde" onclick="agregarCurso()">✚ Agregar Curso</button>
-          <button class="btn-admin azul" onclick="descargarHTML()">⬇️ Descargar HTML</button>
+        <div class="admin-acciones">
+          <button class="btn-admin primario" onclick="agregarCurso()">✚ Agregar curso</button>
         </div>
       </div>
     </div>
@@ -2007,369 +2056,34 @@
   </div>
 
   <script>
-    let cursos = [
-      {
-            id: "g1",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 1ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-05-05",
-            fechaInscripcionFin: "2026-05-18",
-            fechaInicio: "2026-05-19",
-            fechaFin: "2026-06-08",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g2",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 2ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-05-19",
-            fechaInscripcionFin: "2026-06-08",
-            fechaInicio: "2026-06-09",
-            fechaFin: "2026-06-29",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g3",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 3ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-06-09",
-            fechaInscripcionFin: "2026-07-13",
-            fechaInicio: "2026-07-14",
-            fechaFin: "2026-08-03",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g4",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 4ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-07-14",
-            fechaInscripcionFin: "2026-08-10",
-            fechaInicio: "2026-08-11",
-            fechaFin: "2026-08-31",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g5",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 5ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-08-11",
-            fechaInscripcionFin: "2026-09-14",
-            fechaInicio: "2026-09-15",
-            fechaFin: "2026-10-05",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g6",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 6ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-09-15",
-            fechaInscripcionFin: "2026-10-12",
-            fechaInicio: "2026-10-13",
-            fechaFin: "2026-11-02",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "g7",
-            titulo: "Plan de Igualdad del Servicio Andaluz de Salud · 7ª edición",
-            area: "Gesforma",
-            entidad: "Unidad de Formación Servicios Centrales SAS",
-            dirigidoA: "Todas las categorías",
-            plazas: "9999 plazas",
-            fechaInscripcionInicio: "2026-10-13",
-            fechaInscripcionFin: "2026-11-16",
-            fechaInicio: "2026-11-17",
-            fechaFin: "2026-12-07",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "2 horas",
-            creditos: "-",
-            categoria: "Igualdad",
-            modalidad: "Inscripción",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesforma?codEdicion=12281",
-            descripcion: "Actividad formativa sobre el Plan de Igualdad del Servicio Andaluz de Salud."
-      },
-      {
-            id: "p65",
-            titulo: "Píldora 65 · Atención sanitaria en residencias: del modelo a la práctica clínica",
-            area: "Sesiones en el Centro",
-            entidad: "Distrito Sanitario Málaga-Guadalhorce",
-            dirigidoA: "Profesionales del centro",
-            plazas: "-",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            fechaInicio: "2026-05-27",
-            fechaFin: "2026-05-27",
-            hora: "14:00",
-            lugar: "Aula de Formación",
-            horas: "No indicado",
-            creditos: "No aplica",
-            categoria: "Residencias",
-            modalidad: "Presencial",
-            enlace: "",
-            descripcion: "D. Carlos de los Ríos Jaime, Enfermera Gestora de Casos de la Unidad de Residencias de Mayores, y Dr. Higinio Flores Tirado, Médico de Familia de URM para la Zona Hospital Regional Universitario de Málaga."
-      },
-      {
-            id: "rasselh",
-            titulo: "Sesión de Formación RASSELH",
-            area: "Sesiones en el Centro",
-            entidad: "Centro de Salud Tiro de Pichón",
-            dirigidoA: "Profesionales del centro",
-            plazas: "-",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            fechaInicio: "2026-06-04",
-            fechaFin: "2026-06-04",
-            hora: "14:00",
-            lugar: "Aula de Formación",
-            horas: "No indicado",
-            creditos: "No aplica",
-            categoria: "Formación interna",
-            modalidad: "Presencial",
-            enlace: "",
-            descripcion: "Sesión formativa interna presencial sobre RASSELH."
-      },
-      {
-            id: "p66",
-            titulo: "Píldora 66 · Andalucía se vacuna a lo largo de toda la vida",
-            area: "Sesiones en el Centro",
-            entidad: "Distrito Sanitario Málaga-Guadalhorce",
-            dirigidoA: "Profesionales del centro",
-            plazas: "-",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            fechaInicio: "2026-06-09",
-            fechaFin: "2026-06-09",
-            hora: "14:00",
-            lugar: "Aula de Formación",
-            horas: "No indicado",
-            creditos: "No aplica",
-            categoria: "Vacunación",
-            modalidad: "Presencial",
-            enlace: "",
-            descripcion: "María José Ortega Belmonte. Epidemiología del Distrito Sanitario Málaga."
-      },
-      {
-            id: "p67",
-            titulo: "Píldora 67 · Farmacología para quedarse sin amigos: cuando la mitad de 2 no es 1 ni el doble es 4",
-            area: "Sesiones en el Centro",
-            entidad: "Distrito Sanitario Málaga-Guadalhorce",
-            dirigidoA: "Profesionales del centro",
-            plazas: "-",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            fechaInicio: "2026-06-24",
-            fechaFin: "2026-06-24",
-            hora: "14:00",
-            lugar: "Aula de Formación",
-            horas: "No indicado",
-            creditos: "No aplica",
-            categoria: "Farmacología",
-            modalidad: "Presencial",
-            enlace: "",
-            descripcion: "Rafael Páez Valle. Farmacéutico de Atención Primaria del Distrito Sanitario Málaga-Guadalhorce."
-      },
-      {
-            id: "easp-cuello",
-            titulo: "Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía (PDPCCU)",
-            area: "EASP",
-            entidad: "Escuela Andaluza de Salud Pública",
-            dirigidoA: "Medicina y Enfermería de Atención Primaria, Ginecología, epidemiólogos, coordinadores de Distritos Sanitarios y profesionales implicados en el PDPCCU.",
-            plazas: "No indicado",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "2026-05-12",
-            fechaInicio: "2026-06-01",
-            fechaFin: "2026-07-03",
-            hora: "",
-            lugar: "Virtual",
-            horas: "20 horas",
-            creditos: "No indicado",
-            categoria: "Cribado / cáncer de cuello de útero",
-            modalidad: "Virtual",
-            enlace: "https://www.easp.ws/cuello26w",
-            descripcion: "Curso virtual sobre el Programa de Detección Precoz del Cáncer de Cuello de Útero en Andalucía. Límite de inscripción: 12 de mayo."
-      },
-      {
-            id: "desayuno-abs",
-            titulo: "Desayuno formativo",
-            area: "Otros",
-            entidad: "ABS · Juan Antonio",
-            dirigidoA: "Profesionales invitados",
-            plazas: "No indicado",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            fechaInicio: "2026-05-15",
-            fechaFin: "2026-05-15",
-            hora: "09:30",
-            lugar: "La Salud",
-            horas: "No indicado",
-            creditos: "No aplica",
-            categoria: "Desayuno formativo",
-            modalidad: "Presencial",
-            enlace: "",
-            descripcion: "Desayuno formativo este viernes a las 9:30 h, invitados por Juan Antonio, representante de ABS."
-      },
-      {
-            id: "easp-contenciones-2026",
-            titulo: "Buenas prácticas en la prevención y uso de contenciones",
-            area: "EASP",
-            entidad: "Escuela Andaluza de Salud Pública",
-            dirigidoA: "Profesionales sanitarios, con atención directa a pacientes, de atención primaria y hospitalaria en el SAS que actualmente desarrollen su actividad en el Sistema Sanitario Público Andaluz.",
-            plazas: "No indicado",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "",
-            inscripcionTexto: "Inscripción abierta",
-            estadoTexto: "Inscripción abierta",
-            estadoClase: "abierta",
-            fechaInicio: "2026-09-21",
-            fechaFin: "2026-10-22",
-            hora: "",
-            lugar: "Virtual",
-            horas: "No indicado",
-            creditos: "No indicado",
-            categoria: "Contenciones / buenas prácticas",
-            modalidad: "Virtual",
-            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=YEhHegs8LlUsJBt%2bWSMuuMmlKX3X3BylONt4%2f6qQmYI%3d",
-            inscripcionAbierta: true,
-            descripcion: "Curso virtual de la EASP sobre buenas prácticas en la prevención y uso de contenciones. Requisitos indicados: informe favorable del centro de pertenencia y contrato en vigor durante la actividad formativa."
-      },
-      {
-            id: "gesforma-tabaquismo-basica-2026",
-            titulo: "Intervención Básica en Tabaquismo",
-            area: "Gesforma",
-            entidad: "Gesforma Servicios Centrales SAS",
-            dirigidoA: "Enfermería y médicos",
-            plazas: "No indicado",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "2026-05-31",
-            fechaInicio: "2026-06-01",
-            fechaFin: "",
-            hora: "",
-            lugar: "Virtual / Gesforma",
-            horas: "5 horas",
-            creditos: "No indicado",
-            categoria: "Tabaquismo",
-            modalidad: "Virtual",
-            enlace: "https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/sscc/gesformafaces/index.xhtml",
-            descripcion: "Curso virtual de Intervención Básica en Tabaquismo, dirigido a profesionales de Enfermería y Medicina. Inscripción hasta el 31 de mayo."
-      },
-      {
-            id: "custom-1779217409634-uoja4",
-            titulo: "Prescripción Independiente",
-            area: "EASP",
-            entidad: "EASP",
-            dirigidoA: "Enfermeras/os del SSPA.",
-            plazas: "-",
-            fechaInscripcionInicio: "2026-01-01",
-            fechaInscripcionFin: "2026-12-15",
-            fechaInicio: "2026-01-14",
-            fechaFin: "2026-12-30",
-            hora: "",
-            lugar: "Virtual",
-            horas: "3",
-            creditos: "-",
-            categoria: "-",
-            modalidad: "Virtual",
-            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=eyJpdiI6InArVVN5enpraFpDYS9xdXZUSnhONXc9PSIsInZhbHVlIjoiVjl3RmhLRVpKc0J3UDF3U2lXRkVVdz09IiwibWFjIjoiNmY4MGUzZTk0N2M0NTBkYTFhYzM0M2NjOWNkMDBmNzUwMDA2N2RjNjFlYmQ4MWM0ZTJkNDM1ZWVmYWZhNmYwZSIsInRhZyI6IiJ9",
-            descripcion: "Garantizar las competencias necesarias para la obtención del perfil de enfermera acreditada."
-      },
-      {
-            id: "custom-1779217494964-xgbxx",
-            titulo: "Gestión de eventos adversos graves: Atención a la primera, segunda y tercera víctima",
-            area: "EASP",
-            entidad: "EASP",
-            dirigidoA: "Profesionales sanitarios, con atención directa a pacientes, de atención primaria y hospitalaria que actualmente desarrollen su actividad en el Sistema Sanitario Público Andaluz.",
-            plazas: "-",
-            fechaInscripcionInicio: "",
-            fechaInscripcionFin: "2026-06-10",
-            fechaInicio: "2026-06-25",
-            fechaFin: "2026-07-22",
-            hora: "",
-            lugar: "Virtual",
-            horas: "10",
-            creditos: "-",
-            categoria: "-",
-            modalidad: "Virtual",
-            enlace: "https://www.easp.edu.es/programadocente/preinscripcion/?idCurso=eyJpdiI6IndXOTVrYklLbzB0TVg3ZngxbDg3eXc9PSIsInZhbHVlIjoiRnBML1RnRkhBczNoR0hTR1hDeHlidz09IiwibWFjIjoiYzQ0MGIzNzlmNWY0YzNiNTI4MDBjMjI2NGY5ZmM1ODM2YTQ1YWNkNmQwYmRiMTE5OGNhODI5MDc5MGI5YmEyMCIsInRhZyI6IiJ9",
-            descripcion: "Conocer las herramientas necesarias para actuar ante un Evento Adverso Grave (EAG) o Evento Centinela (EC), utilizando un enfoque sistémico que abarca a las tres figuras afectadas: el paciente (1ª víctima), el profesional (2ª víctima) y la institución (3ª víctima)."
-      }
-];
+    const SUPABASE_URL = 'https://dbpdyvulixmadqpacywx.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_hrFENidzl1tL8x4hQfbSuA_MlBCNPxS';
+    let adminToken = null;
+    let cursos = [];
 
-    try {
-      const guardados = localStorage.getItem('cursos_agenda');
-      if (guardados) {
-        const parseados = JSON.parse(guardados);
-        const customCourses = parseados.filter(c => c.id.startsWith('custom-'));
-        
-        // Solo añadir si el ID no existe ya (evita duplicados cuando se haya descargado y subido el HTML a GitHub con los cursos incrustados)
-        customCourses.forEach(cc => {
-          if (!cursos.find(existente => existente.id === cc.id)) {
-            cursos.push(cc);
+    async function cargarCursos() {
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/cursos?select=*', {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY
           }
         });
+        if (!res.ok) throw new Error('Error al conectar con la base de datos');
+        const data = await res.json();
+        if (data && Array.isArray(data)) {
+          cursos = data;
+        }
+      } catch (err) {
+        console.error('Error cargando cursos:', err);
       }
-    } catch(e) {
-      console.error('Error cargando cursos', e);
+      pinta();
+      resumen();
+      destacadas();
     }
+    
+    // Cargar los cursos al iniciar
+    cargarCursos();
 
     const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
     const mesesCorto = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -2418,7 +2132,6 @@
       return (v === undefined || v === null || v === '') ? '-' : v;
     }
 
-    /* Devuelve true si el evento ya ha terminado (fechaFin < hoy, o fechaInicio si no hay fin) */
     function esPasado(c) {
       const hd = new Date();
       hd.setHours(0, 0, 0, 0);
@@ -2433,70 +2146,44 @@
     }
 
     function areaClass(a) {
-      return a.replaceAll(' ', '');
+      return (a || '').replaceAll(' ', '');
     }
 
     function insc(c) {
       if (esPasado(c)) return '-';
-      
       const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       const f = pf(c.fechaInscripcionFin);
-      const i = pf(c.fechaInscripcionInicio);
-
       if (f && h > f) return 'Plazo finalizado';
-      
       if (c.inscripcionTexto) return c.inscripcionTexto;
       if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') return 'Inscripción abierta';
       if (c.inscripcionAbierta) return 'Inscripción abierta';
       if (c.enlace && c.area !== 'Sesiones en el Centro' && !c.fechaInscripcionInicio && !c.fechaInscripcionFin) return 'Inscripción abierta';
       if (!c.fechaInscripcionInicio && !c.fechaInscripcionFin) return '-';
-      
       if (!c.fechaInscripcionInicio && c.fechaInscripcionFin) return 'Hasta ' + fb(c.fechaInscripcionFin);
       return fb(c.fechaInscripcionInicio) + ' al ' + fb(c.fechaInscripcionFin);
     }
 
     function estado(c) {
       if (esPasado(c)) return { t: 'Finalizado / cerrado', cl: 'cerrada' };
-      
       const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       const i = pf(c.fechaInscripcionInicio);
       const f = pf(c.fechaInscripcionFin);
       const ini = pf(c.fechaInicio);
 
-      // 1. Si la inscripción ya ha terminado
       if (f && h > f) return { t: 'Inscripción finalizada', cl: 'cerrada' };
-      
-      // 2. Si la inscripción aún no ha empezado
       if (i && h < i) return { t: 'Inscripción próximamente', cl: 'proxima' };
-
-      // 3. Casos estáticos (solo aplican si las fechas no indican que ya cerró o aún no empezó)
       if (c.estadoTexto) return { t: c.estadoTexto, cl: c.estadoClase || 'abierta' };
-      if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') {
-        return { t: 'Inscripción abierta', cl: 'abierta' };
-      }
-      if (c.inscripcionAbierta) {
-        return { t: 'Inscripción abierta', cl: 'abierta' };
-      }
-      if (c.enlace && c.area !== 'Sesiones en el Centro' && !c.fechaInscripcionInicio && !c.fechaInscripcionFin) {
-        return { t: 'Inscripción abierta', cl: 'abierta' };
-      }
-      if (c.area === 'Sesiones en el Centro') {
-        return { t: 'Presencial · 14:00 · Aula de Formación', cl: 'presencial' };
-      }
-      if (!c.fechaInscripcionInicio && !c.fechaInscripcionFin) {
-        return { t: 'Sin inscripción online', cl: 'sininscripcion' };
-      }
-
-      // 4. Lógica dinámica de fechas de inscripción
+      if (c.id === 'easp-contenciones-2026' || c.titulo === 'Buenas prácticas en la prevención y uso de contenciones') return { t: 'Inscripción abierta', cl: 'abierta' };
+      if (c.inscripcionAbierta) return { t: 'Inscripción abierta', cl: 'abierta' };
+      if (c.enlace && c.area !== 'Sesiones en el Centro' && !c.fechaInscripcionInicio && !c.fechaInscripcionFin) return { t: 'Inscripción abierta', cl: 'abierta' };
+      if (c.area === 'Sesiones en el Centro') return { t: 'Presencial · 14:00 · Aula de Formación', cl: 'presencial' };
+      if (!c.fechaInscripcionInicio && !c.fechaInscripcionFin) return { t: 'Sin inscripción online', cl: 'sininscripcion' };
       if (i && f && h >= i && h <= f) return { t: 'Inscripción abierta', cl: 'abierta' };
       if (!i && f && h <= f) return { t: 'Inscripción abierta hasta ' + fb(c.fechaInscripcionFin), cl: 'abierta' };
       if (i && !f && h >= i) return { t: 'Inscripción abierta', cl: 'abierta' };
-      
-      // Si la actividad aún no ha empezado pero no hay fechas de inscripción explícitas (o han pasado por error lógico)
       if (ini && h < ini) return { t: 'Próximamente', cl: 'proxima' };
-      
       return { t: 'Finalizado / cerrado', cl: 'cerrada' };
     }
 
@@ -2509,22 +2196,18 @@
       let r = cursos.filter(c => {
         const matchQ = limpia(Object.values(c).join(' ')).includes(q);
         const past = esPasado(c);
-        /* Si se elige «Eventos Pasados» en orden: mostrar solo los terminados del área elegida */
         if (soloP) return past && (a === 'Todas' || c.area === a) && matchQ;
-        /* Resto: mostrar solo eventos vigentes/futuros del área elegida */
         return !past && (a === 'Todas' || c.area === a) && matchQ;
       });
 
       r.sort((x, y) => {
-        /* Eventos Pasados: el más reciente primero */
         if (soloP) return (pf(y.fechaFin) || pf(y.fechaInicio)) - (pf(x.fechaFin) || pf(x.fechaInicio));
         if (o === 'inicioAsc') return pf(x.fechaInicio) - pf(y.fechaInicio);
         if (o === 'inicioDesc') return pf(y.fechaInicio) - pf(x.fechaInicio);
         if (o === 'insAsc') return (pf(x.fechaInscripcionInicio) || pf(x.fechaInscripcionFin) || pf(x.fechaInicio)) - (pf(y.fechaInscripcionInicio) || pf(y.fechaInscripcionFin) || pf(y.fechaInicio));
         if (o === 'insDesc') return (pf(y.fechaInscripcionInicio) || pf(y.fechaInscripcionFin) || pf(y.fechaInicio)) - (pf(x.fechaInscripcionInicio) || pf(x.fechaInscripcionFin) || pf(x.fechaInicio));
-        return x.titulo.localeCompare(y.titulo, 'es');
+        return (x.titulo || '').localeCompare(y.titulo || '', 'es');
       });
-
       return r;
     }
 
@@ -2537,7 +2220,7 @@
       document.getElementById('titLista').textContent = area === 'Todas' ? 'Todas las actividades' : document.getElementById('fArea').selectedOptions[0].text;
 
       if (!r.length) {
-        lista.innerHTML = '<div class="sinres">No hay cursos que coincidan con los filtros.</div>';
+        lista.innerHTML = "<div class=\"sinres\">No hay cursos que coincidan con los filtros.</div>";
         cal();
         resumen();
         destacadas();
@@ -2546,7 +2229,13 @@
 
       lista.innerHTML = r.map(c => {
         const e = estado(c);
-        const link = c.enlace ? '<a class="btn" href="' + c.enlace + '" target="_blank" rel="noopener noreferrer">Ir a Inscripción</a>' : '';
+        const link = c.enlace ? "<a class=\"btn\" href=\"" + c.enlace + "\" target=\"_blank\" rel=\"noopener noreferrer\">Ir a Inscripción</a>" : '';
+        
+        let editButtons = "";
+        if (adminAutenticado) {
+          editButtons = "<button class=\"btn-admin-action btn-admin-edit\" style=\"margin-left: auto;\" onclick=\"cargarEdicion('" + c.id + "')\">✏️ Editar</button>" +
+                        "<button class=\"btn-admin-action btn-admin-del\" onclick=\"eliminarCurso('" + c.id + "')\">❌ Eliminar</button>";
+        }
 
         const hc = () => {
           let h = (c.horas && !c.horas.match(/no indicad/i) && c.horas !== '-') ? c.horas.replace(/ horas?/i, 'h') : '';
@@ -2555,36 +2244,22 @@
           if (h && cr) return h + ' / ' + cr + ' cr';
           return h || (cr + ' cr');
         };
-
         let fechas = fb(c.fechaInicio);
-        if (c.fechaFin && c.fechaFin !== c.fechaInicio) {
-          fechas += ' al ' + fb(c.fechaFin);
-        }
+        if (c.fechaFin && c.fechaFin !== c.fechaInicio) fechas += ' al ' + fb(c.fechaFin);
 
-        return `
-      <article class="curso ${areaClass(c.area)}" id="${c.id}">
-        <div class="cab-curso">
-          <h3>${val(c.titulo)}</h3>
-          <span class="badge b${areaClass(c.area)}">${val(c.area)}</span>
-        </div>
-
-        <div class="meta">
-          <div class="dato"><span>Inscripción</span><strong>${val(insc(c))}</strong></div>
-          <div class="dato"><span>Fechas</span><strong>${fechas}${c.hora ? ' · ' + c.hora + 'h' : ''}</strong></div>
-          <div class="dato"><span>Lugar</span><strong>${val(c.lugar)} · ${val(c.modalidad)}</strong></div>
-          <div class="dato"><span>Horas / Cr.</span><strong>${hc()}</strong></div>
-          <div class="dato"><span>Entidad</span><strong>${val(c.entidad)}</strong></div>
-          <div class="dato"><span>Dirigido a</span><strong>${val(c.dirigidoA)}</strong></div>
-        </div>
-
-        <p class="desc">${val(c.descripcion)}</p>
-
-        <div class="acciones">
-          ${link}
-          <span class="estado ${e.cl}">${e.t}</span>
-        </div>
-      </article>
-    `;
+        return "<article class=\"curso " + areaClass(c.area) + "\" id=\"" + c.id + "\">" +
+          "<div class=\"cab-curso\"><h3>" + val(c.titulo) + "</h3><span class=\"badge b" + areaClass(c.area) + "\">" + val(c.area) + "</span></div>" +
+          "<div class=\"meta\">" +
+          "<div class=\"dato\"><span>Inscripción</span><strong>" + val(insc(c)) + "</strong></div>" +
+          "<div class=\"dato\"><span>Fechas</span><strong>" + fechas + (c.hora ? " · " + c.hora + "h" : "") + "</strong></div>" +
+          "<div class=\"dato\"><span>Lugar</span><strong>" + val(c.lugar) + " · " + val(c.modalidad) + "</strong></div>" +
+          "<div class=\"dato\"><span>Horas / Cr.</span><strong>" + hc() + "</strong></div>" +
+          "<div class=\"dato\"><span>Entidad</span><strong>" + val(c.entidad) + "</strong></div>" +
+          "<div class=\"dato\"><span>Dirigido a</span><strong>" + val(c.dirigidoA) + "</strong></div>" +
+          "</div>" +
+          "<p class=\"desc\">" + val(c.descripcion) + "</p>" +
+          "<div class=\"acciones\">" + link + "<span class=\"estado " + e.cl + "\">" + e.t + "</span>" + editButtons + "</div>" +
+          "</article>";
       }).join('');
 
       cal();
@@ -2596,11 +2271,9 @@
       const y = fcal.getFullYear();
       const m = fcal.getMonth();
       document.getElementById('mes').textContent = meses[m].toUpperCase() + ' ' + y;
-
       const primero = new Date(y, m, 1);
       const ini = new Date(primero);
       ini.setDate(1 - ((primero.getDay() + 6) % 7));
-
       const modo = document.getElementById('modoCal').value;
       const r = filtra();
       const hoy = new Date();
@@ -2612,36 +2285,21 @@
         d.setDate(ini.getDate() + k);
         const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
         const isPast = d < h;
-
         let ev = [];
-
         r.forEach(c => {
-          if ((modo === 'ambas' || modo === 'inscripcion') && c.fechaInscripcionInicio === iso) {
-            ev.push({ c, txt: 'Abre' });
-          }
-          if ((modo === 'ambas' || modo === 'inscripcion') && c.fechaInscripcionFin === iso && c.fechaInscripcionFin && !c.fechaInscripcionInicio) {
-            ev.push({ c, txt: 'Fin ins.' });
-          }
-          if ((modo === 'ambas' || modo === 'inicio') && c.fechaInicio === iso) {
-            ev.push({ c, txt: c.area === 'Sesiones en el Centro' ? 'Sesión' : 'Inicio' });
-          }
+          if ((modo === 'ambas' || modo === 'inscripcion') && c.fechaInscripcionInicio === iso) ev.push({ c, txt: 'Abre' });
+          if ((modo === 'ambas' || modo === 'inscripcion') && c.fechaInscripcionFin === iso && c.fechaInscripcionFin && !c.fechaInscripcionInicio) ev.push({ c, txt: 'Fin ins.' });
+          if ((modo === 'ambas' || modo === 'inicio') && c.fechaInicio === iso) ev.push({ c, txt: c.area === 'Sesiones en el Centro' ? 'Sesión' : 'Inicio' });
         });
-
         const isToday = d.getFullYear() === hoy.getFullYear() && d.getMonth() === hoy.getMonth() && d.getDate() === hoy.getDate();
-
-        html += `
-      <div class="dia ${d.getMonth() !== m ? 'fuera' : ''} ${isToday ? 'hoy' : ''}">
-        <div class="num">${d.getDate()}</div>
-        ${ev.slice(0, 3).map(e => `
-          <div class="ev ${areaClass(e.c.area)} ${isPast ? 'pasado' : ''}" title="${e.txt} · ${e.c.titulo}" onclick="goEvent('${e.c.id}')">
-            ${e.txt} · ${e.c.titulo.replace('Plan de Igualdad del Servicio Andaluz de Salud · ', '')}
-          </div>
-        `).join('')}
-        ${ev.length > 3 ? `<div class="ev ${areaClass(ev[0].c.area)} ${isPast ? 'pasado' : ''}">+${ev.length - 3} más</div>` : ''}
-      </div>
-    `;
+        
+        let dhtml = "<div class=\"dia " + (d.getMonth() !== m ? "fuera" : "") + " " + (isToday ? "hoy" : "") + "\">" +
+          "<div class=\"num\">" + d.getDate() + "</div>" +
+          ev.slice(0, 3).map(e => "<div class=\"ev " + areaClass(e.c.area) + " " + (isPast ? "pasado" : "") + "\" title=\"" + e.txt + " · " + e.c.titulo + "\" onclick=\"goEvent('" + e.c.id + "')\">" + e.txt + " · " + (e.c.titulo||'').replace('Plan de Igualdad del Servicio Andaluz de Salud · ', '') + "</div>").join('') +
+          (ev.length > 3 ? "<div class=\"ev " + areaClass(ev[0].c.area) + " " + (isPast ? "pasado" : "") + "\">+" + (ev.length - 3) + " más</div>" : "") +
+          "</div>";
+        html += dhtml;
       }
-
       document.getElementById('grid').innerHTML = html;
     }
 
@@ -2656,69 +2314,37 @@
       const cont = document.getElementById('proximasGrid');
       const hoy = new Date();
       const h = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-
-      let prox = cursos
-        .filter(c => pf(c.fechaInicio) >= h)
-        .sort((a, b) => pf(a.fechaInicio) - pf(b.fechaInicio))
-        .slice(0, 3);
-
-      if (!prox.length) {
-        prox = [...cursos].sort((a, b) => pf(a.fechaInicio) - pf(b.fechaInicio)).slice(0, 3);
-      }
-
+      let prox = cursos.filter(c => pf(c.fechaInicio) >= h).sort((a, b) => pf(a.fechaInicio) - pf(b.fechaInicio)).slice(0, 3);
+      if (!prox.length) prox = [...cursos].sort((a, b) => pf(a.fechaInicio) - pf(b.fechaInicio)).slice(0, 3);
+      
       cont.innerHTML = prox.map(c => {
         const d = pf(c.fechaInicio);
         const fbRes = fb(c.fechaInicio);
         let diaHtml;
-        if (fbRes === 'Hoy') {
-          diaHtml = `<span style="font-size: .95rem; font-weight: 900; display: block; padding: 4px 0;">Hoy</span>`;
-        } else if (fbRes === 'Mañana') {
-          diaHtml = `<span style="font-size: .72rem; font-weight: 900; display: block; padding: 6px 0;">Mañana</span>`;
-        } else {
-          diaHtml = `<strong>${String(d.getDate()).padStart(2, '0')}</strong><span>${mesesCorto[d.getMonth()]}</span>`;
-        }
+        if (fbRes === 'Hoy') diaHtml = "<span style=\"font-size: .95rem; font-weight: 900; display: block; padding: 4px 0;\">Hoy</span>";
+        else if (fbRes === 'Mañana') diaHtml = "<span style=\"font-size: .72rem; font-weight: 900; display: block; padding: 6px 0;\">Mañana</span>";
+        else diaHtml = "<strong>" + String(d.getDate()).padStart(2, '0') + "</strong><span>" + mesesCorto[d.getMonth()] + "</span>";
 
-        return `
-      <article class="proxima-card ${areaClass(c.area)}" onclick="goEvent('${c.id}')">
-        <div class="fecha-mini">
-          <div class="dia-mini">
-            ${diaHtml}
-          </div>
-          <span class="badge b${areaClass(c.area)}">${c.area}</span>
-        </div>
-        <h3>${c.titulo}</h3>
-        <p>${c.hora ? c.hora + ' h · ' : ''}${c.lugar} · ${c.modalidad}</p>
-      </article>
-    `;
+        return "<article class=\"proxima-card " + areaClass(c.area) + "\" onclick=\"goEvent('" + c.id + "')\">" +
+          "<div class=\"fecha-mini\"><div class=\"dia-mini\">" + diaHtml + "</div><span class=\"badge b" + areaClass(c.area) + "\">" + c.area + "</span></div>" +
+          "<h3>" + c.titulo + "</h3><p>" + (c.hora ? c.hora + " h · " : "") + c.lugar + " · " + c.modalidad + "</p></article>";
       }).join('');
     }
 
     document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
-      if (b.dataset.area === 'Calendario') {
-        document.querySelector('.cal').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
-      document.querySelectorAll('.tab').forEach(x => {
-        if (x.dataset.area !== 'Calendario') x.classList.remove('activa');
-      });
+      if (b.dataset.area === 'Calendario') { document.querySelector('.cal').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+      document.querySelectorAll('.tab').forEach(x => { if (x.dataset.area !== 'Calendario') x.classList.remove('activa'); });
       b.classList.add('activa');
       document.getElementById('fArea').value = b.dataset.area;
       document.getElementById('fAreaCal').value = b.dataset.area;
       pinta();
-
-      if (window.innerWidth <= 900) {
-        document.querySelector('.layout').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (window.innerWidth <= 900) document.querySelector('.layout').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-
-    // syncArea declarada arriba
 
     document.getElementById('fArea').onchange = (e) => syncArea(e.target.value);
     document.getElementById('fAreaCal').onchange = (e) => {
       syncArea(e.target.value);
-      if (window.innerWidth <= 900) {
-        document.querySelector('.cal').scrollIntoView({ behavior: 'auto', block: 'start' });
-      }
+      if (window.innerWidth <= 900) document.querySelector('.cal').scrollIntoView({ behavior: 'auto', block: 'start' });
     };
 
     ['buscar', 'orden'].forEach(id => {
@@ -2728,36 +2354,20 @@
 
     document.getElementById('modoCal').onchange = () => {
       pinta();
-      if (window.innerWidth <= 900) {
-        document.querySelector('.cal').scrollIntoView({ behavior: 'auto', block: 'start' });
-      }
+      if (window.innerWidth <= 900) document.querySelector('.cal').scrollIntoView({ behavior: 'auto', block: 'start' });
     };
 
-    document.getElementById('prev').onclick = () => {
-      fcal.setMonth(fcal.getMonth() - 1);
-      cal();
-    };
-
-    document.getElementById('next').onclick = () => {
-      fcal.setMonth(fcal.getMonth() + 1);
-      cal();
-    };
-
-    pinta();
+    document.getElementById('prev').onclick = () => { fcal.setMonth(fcal.getMonth() - 1); cal(); };
+    document.getElementById('next').onclick = () => { fcal.setMonth(fcal.getMonth() + 1); cal(); };
 
     /* ══════════════════════════════════════════
-       ZONA PRIVADA — Lógica de administración
+       ZONA PRIVADA
     ══════════════════════════════════════════ */
-
-    const ADMIN_USER = 'admin';
-    const ADMIN_PASS = 'agrosana11N20A.';
     let adminAutenticado = false;
+    let intentosLogin = parseInt(localStorage.getItem('intentos_admin') || '0');
 
     function abrirLogin() {
-      if (adminAutenticado) {
-        abrirAdmin();
-        return;
-      }
+      if (adminAutenticado) return; // Si ya está autenticado, no hacer nada al pulsar la zona privada (o podría abrir el admin)
       document.getElementById('loginUsuario').value = '';
       document.getElementById('loginPass').value = '';
       document.getElementById('errorLogin').style.display = 'none';
@@ -2765,22 +2375,40 @@
       setTimeout(() => document.getElementById('loginUsuario').focus(), 100);
     }
 
-    function cerrarLogin() {
-      document.getElementById('modalLogin').classList.remove('abierto');
+    function cerrarLogin() { document.getElementById('modalLogin').classList.remove('abierto'); }
+    function abrirAdmin() { 
+      document.getElementById('modalAdmin').classList.add('abierto'); 
+      document.getElementById('errAdmin').style.display = 'none'; 
+      
+      // Si no es edición, limpiar campos
+      const btn = document.getElementById('btnGuardarCurso');
+      if (btn && btn.innerHTML.includes('Agregar Curso')) {
+        limpiarFormularioAdmin();
+      }
+    }
+    
+    function cerrarAdmin() { 
+      document.getElementById('modalAdmin').classList.remove('abierto'); 
+      const modal = document.getElementById('modalAdmin');
+      if (modal) modal.dataset.editId = ''; // Limpiar edit state
+      const btn = document.getElementById('btnGuardarCurso');
+      if (btn) btn.innerHTML = '✚ Agregar Curso';
     }
 
-    function abrirAdmin() {
-      document.getElementById('modalAdmin').classList.add('abierto');
-      document.getElementById('errAdmin').style.display = 'none';
+    function limpiarFormularioAdmin() {
+      ['aTitle', 'aEntidad', 'aDirigido', 'aPlazas', 'aFInsIni', 'aFInsFin', 'aFIni', 'aFFin', 'aHora', 'aLugar', 'aHoras', 'aCreditos', 'aCategoria', 'aEnlace', 'aDesc'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      const ar = document.getElementById('aArea'); if (ar) ar.value = 'Gesforma';
+      const mod = document.getElementById('aModalidad'); if (mod) mod.value = 'Virtual';
+      
+      const modal = document.getElementById('modalAdmin');
+      if (modal) modal.dataset.editId = '';
+      const btn = document.getElementById('btnGuardarCurso');
+      if (btn) btn.innerHTML = '✚ Agregar Curso';
     }
 
-    function cerrarAdmin() {
-      document.getElementById('modalAdmin').classList.remove('abierto');
-    }
-
-    let intentosLogin = parseInt(localStorage.getItem('intentos_admin') || '0');
-
-    function intentarLogin() {
+    async function intentarLogin() {
       const u = document.getElementById('loginUsuario').value.trim();
       const p = document.getElementById('loginPass').value;
       const err = document.getElementById('errorLogin');
@@ -2791,59 +2419,66 @@
         return;
       }
 
-      if (u === ADMIN_USER && p === ADMIN_PASS) {
-        adminAutenticado = true;
-        intentosLogin = 0;
-        localStorage.removeItem('intentos_admin');
-        cerrarLogin();
-        // Actualizar botón para indicar sesión activa
-        const btn = document.getElementById('btnZonaPrivada');
-        btn.style.background = 'rgba(22,163,74,.18)';
-        btn.style.borderColor = 'rgba(22,163,74,.5)';
-        btn.style.color = '#86efac';
-        btn.innerHTML = '<span class="lock-icon">🔓</span> <span class="zp-text">Zona Privada</span>';
-        abrirAdmin();
-      } else {
+      err.style.display = 'none';
+      try {
+        const res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: u, password: p })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.access_token) {
+          adminAutenticado = true;
+          adminToken = data.access_token;
+          intentosLogin = 0;
+          localStorage.removeItem('intentos_admin');
+          cerrarLogin();
+          
+          const btn = document.getElementById('btnZonaPrivada');
+          if (btn) {
+            btn.style.background = 'rgba(22,163,74,.18)';
+            btn.style.borderColor = 'rgba(22,163,74,.5)';
+            btn.style.color = '#86efac';
+            btn.style.cursor = 'default';
+            btn.innerHTML = "<span class=\"lock-icon\">🔓</span> <span class=\"zp-text\">Zona Privada</span>";
+            btn.onclick = null; // No volver a abrir login
+          }
+          
+          const addBtn = document.getElementById('btnAddAdmin');
+          if(addBtn) addBtn.style.display = 'inline-flex';
+          
+          pinta(); // repintar para que aparezcan los botones de edición/borrado
+        } else {
+          throw new Error('Invalid login');
+        }
+      } catch (e) {
         intentosLogin++;
         localStorage.setItem('intentos_admin', intentosLogin);
-        
         if (intentosLogin >= 3) {
           err.innerHTML = 'Enviando alerta de seguridad...';
           err.style.display = 'block';
           document.getElementById('loginPass').value = '';
-          
-          // Simulamos el tiempo de envío del correo para dar feedback visual
-          setTimeout(() => {
-            err.innerHTML = 'Nada, intentalo mejor con la Lotería de Navidad.<br>Si quieres volver a probar, revisa tu correo electrónico cabeza hueca.';
-          }, 1200);
+          setTimeout(() => { err.innerHTML = 'Nada, intentalo mejor con la Lotería de Navidad.<br>Si quieres volver a probar, revisa tu correo electrónico cabeza hueca.'; }, 1200);
         } else if (intentosLogin === 2) {
           err.innerHTML = 'Eyy!! que te estoy observando!! Cuidado con lo que haces.';
           err.style.display = 'block';
-          document.getElementById('loginPass').value = '';
-          document.getElementById('loginPass').focus();
+          document.getElementById('loginPass').value = ''; document.getElementById('loginPass').focus();
         } else {
           err.innerHTML = 'oye! ¿no te estarás metiendo donde no debes?';
           err.style.display = 'block';
-          document.getElementById('loginPass').value = '';
-          document.getElementById('loginPass').focus();
+          document.getElementById('loginPass').value = ''; document.getElementById('loginPass').focus();
         }
       }
     }
 
-    // Permitir Enter en los campos de login
     ['loginUsuario', 'loginPass'].forEach(id => {
-      document.getElementById(id).addEventListener('keydown', e => {
-        if (e.key === 'Enter') intentarLogin();
-      });
+      const el = document.getElementById(id);
+      if(el) el.addEventListener('keydown', e => { if (e.key === 'Enter') intentarLogin(); });
     });
 
-    // Cerrar modal al hacer clic en el overlay
-    document.getElementById('modalLogin').addEventListener('click', function (e) {
-      if (e.target === this) cerrarLogin();
-    });
-    document.getElementById('modalAdmin').addEventListener('click', function (e) {
-      if (e.target === this) cerrarAdmin();
-    });
+    document.getElementById('modalLogin').addEventListener('click', function (e) { if (e.target === this) cerrarLogin(); });
+    document.getElementById('modalAdmin').addEventListener('click', function (e) { if (e.target === this) cerrarAdmin(); });
 
     function mostrarToast(msg, color) {
       const t = document.getElementById('notifToast');
@@ -2853,163 +2488,132 @@
       setTimeout(() => t.classList.remove('visible'), 3800);
     }
 
-    function generarId() {
-      return 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+    function generarId() { return 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7); }
+    function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+    async function eliminarCurso(id) {
+      if (!confirm('¿Estás seguro de que deseas eliminar este curso de la base de datos? Esta acción no se puede deshacer.')) return;
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/cursos?id=eq.' + id, {
+          method: 'DELETE',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + (adminToken || SUPABASE_KEY)
+          }
+        });
+        if (!res.ok) throw new Error('Error al eliminar');
+        cursos = cursos.filter(c => c.id !== id);
+        pinta();
+        mostrarToast('✓ Curso eliminado correctamente', '#dc2626');
+      } catch(err) {
+        console.error(err);
+        alert('Hubo un error al eliminar el curso.');
+      }
     }
 
-    function v(id) {
-      const el = document.getElementById(id);
-      if (!el) return '';
-      return el.value.trim();
+    function cargarEdicion(id) {
+      const c = cursos.find(x => x.id === id);
+      if (!c) return;
+      
+      document.getElementById('aTitle').value = c.titulo || '';
+      document.getElementById('aArea').value = c.area || 'Gesforma';
+      document.getElementById('aModalidad').value = c.modalidad || 'Virtual';
+      document.getElementById('aEntidad').value = c.entidad || '';
+      document.getElementById('aDirigido').value = c.dirigidoA || '';
+      document.getElementById('aFInsIni').value = c.fechaInscripcionInicio || '';
+      document.getElementById('aFInsFin').value = c.fechaInscripcionFin || '';
+      document.getElementById('aFIni').value = c.fechaInicio || '';
+      document.getElementById('aFFin').value = c.fechaFin || '';
+      document.getElementById('aHora').value = c.hora || '';
+      document.getElementById('aLugar').value = c.lugar || '';
+      document.getElementById('aHoras').value = (c.horas === '-' ? '' : c.horas) || '';
+      document.getElementById('aPlazas').value = (c.plazas === '-' ? '' : c.plazas) || '';
+      document.getElementById('aCreditos').value = (c.creditos === '-' ? '' : c.creditos) || '';
+      document.getElementById('aCategoria').value = (c.categoria === '-' ? '' : c.categoria) || '';
+      document.getElementById('aEnlace').value = c.enlace || '';
+      document.getElementById('aDesc').value = c.descripcion || '';
+      
+      const modal = document.getElementById('modalAdmin');
+      modal.dataset.editId = id;
+      
+      const btn = document.getElementById('btnGuardarCurso');
+      if (btn) btn.innerHTML = '💾 Guardar Cambios';
+      
+      // Abrimos el modal sin limpiar
+      document.getElementById('modalAdmin').classList.add('abierto'); 
+      document.getElementById('errAdmin').style.display = 'none'; 
     }
 
-    function agregarCurso() {
+    async function agregarCurso() {
       const titulo = v('aTitle');
       const fechaInicio = v('aFIni');
       const area = v('aArea');
-
       const errEl = document.getElementById('errAdmin');
-      if (!titulo) {
-        errEl.textContent = 'El título es obligatorio.';
-        errEl.style.display = 'block';
-        document.getElementById('aTitle').focus();
-        return;
-      }
-      if (!fechaInicio) {
-        errEl.textContent = 'La fecha de inicio es obligatoria.';
-        errEl.style.display = 'block';
-        document.getElementById('aFIni').focus();
-        return;
-      }
+
+      if (!titulo) { errEl.textContent = 'El título es obligatorio.'; errEl.style.display = 'block'; document.getElementById('aTitle').focus(); return; }
+      if (!fechaInicio) { errEl.textContent = 'La fecha de inicio es obligatoria.'; errEl.style.display = 'block'; document.getElementById('aFIni').focus(); return; }
       errEl.style.display = 'none';
 
-      const nuevoCurso = {
-        id: generarId(),
-        titulo: titulo,
-        area: area,
-        entidad: v('aEntidad') || '-',
-        dirigidoA: v('aDirigido') || '-',
-        plazas: v('aPlazas') || '-',
-        fechaInscripcionInicio: v('aFInsIni') || '',
-        fechaInscripcionFin: v('aFInsFin') || '',
-        fechaInicio: fechaInicio,
-        fechaFin: v('aFFin') || fechaInicio,
-        hora: v('aHora') || '',
-        lugar: v('aLugar') || '-',
-        horas: v('aHoras') || '-',
-        creditos: v('aCreditos') || '-',
-        categoria: v('aCategoria') || '-',
-        modalidad: v('aModalidad') || '-',
-        enlace: v('aEnlace') || '',
-        descripcion: v('aDesc') || '-'
+      const modal = document.getElementById('modalAdmin');
+      const editId = modal.dataset.editId;
+      const isEdit = !!editId;
+
+      const datosCurso = {
+        titulo: titulo, area: area, entidad: v('aEntidad'), dirigidoA: v('aDirigido'),
+        plazas: v('aPlazas') || '-', fechaInscripcionInicio: v('aFInsIni'), fechaInscripcionFin: v('aFInsFin'),
+        fechaInicio: fechaInicio, fechaFin: v('aFFin') || fechaInicio, hora: v('aHora'), lugar: v('aLugar'),
+        horas: v('aHoras') || '-', creditos: v('aCreditos') || '-', categoria: v('aCategoria') || '-', 
+        modalidad: v('aModalidad'), enlace: v('aEnlace'),
+        descripcion: v('aDesc') || (isEdit ? '' : 'Añadido manualmente desde la zona privada.')
       };
 
-      // Añadir al array global
-      cursos.push(nuevoCurso);
-      
-      // Guardar custom courses en localStorage
-      try {
-        const customCourses = cursos.filter(c => c.id.startsWith('custom-'));
-        localStorage.setItem('cursos_agenda', JSON.stringify(customCourses));
-      } catch(e) {
-        console.error('Error guardando curso', e);
+      if (!isEdit) {
+        datosCurso.id = generarId();
+        datosCurso.inscripcionTexto = '';
+        datosCurso.estadoTexto = '';
+        datosCurso.estadoClase = '';
+        datosCurso.inscripcionAbierta = null;
       }
 
-      // Refrescar toda la web
-      pinta();
-
-      // Limpiar formulario
-      ['aTitle', 'aEntidad', 'aDirigido', 'aPlazas', 'aFInsIni', 'aFInsFin', 'aFIni', 'aFFin',
-        'aHora', 'aLugar', 'aHoras', 'aCreditos', 'aCategoria', 'aEnlace', 'aDesc'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.value = '';
-        });
-      document.getElementById('aArea').value = 'Gesforma';
-      document.getElementById('aModalidad').value = 'Virtual';
-
-      cerrarAdmin();
-
-      // Hacer scroll al curso si el área coincide con el filtro activo
-      const areaActual = document.getElementById('fArea').value;
-      if (areaActual !== 'Todas' && areaActual !== area) {
-        syncArea('Todas');
-      }
-
-      mostrarToast('✓ Curso "' + titulo.slice(0, 40) + (titulo.length > 40 ? '…' : '') + '" añadido correctamente', '#16a34a');
-
-      // Scroll al curso recién añadido
-      setTimeout(() => {
-        const el = document.getElementById(nuevoCurso.id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 400);
-    }
-
-    async function descargarHTML() {
       try {
-        // Clonar el documento para no afectar la vista actual
-        const clone = document.documentElement.cloneNode(true);
-        
-        // Limpiar contenido inyectado por JS para no engordar el archivo
-        const toClean = ['lista', 'grid', 'proximasGrid'];
-        toClean.forEach(id => {
-          const el = clone.querySelector('#' + id);
-          if (el) el.innerHTML = '';
+        const url = SUPABASE_URL + '/rest/v1/cursos' + (isEdit ? '?id=eq.' + editId : '');
+        const res = await fetch(url, {
+          method: isEdit ? 'PATCH' : 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + (adminToken || SUPABASE_KEY),
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(datosCurso)
         });
+        if (!res.ok) throw new Error('Error al guardar');
         
-        // Restaurar estado de modales y botones
-        clone.querySelector('#modalAdmin').classList.remove('abierto');
-        clone.querySelector('#modalLogin').classList.remove('abierto');
-        
-        const btnZP = clone.querySelector('#btnZonaPrivada');
-        if(btnZP) {
-          btnZP.innerHTML = '<span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span>';
-          btnZP.removeAttribute('style');
+        if (isEdit) {
+          const idx = cursos.findIndex(c => c.id === editId);
+          if (idx !== -1) cursos[idx] = { ...cursos[idx], ...datosCurso };
+        } else {
+          cursos.push(datosCurso);
         }
         
-        const errA = clone.querySelector('#errAdmin');
-        if(errA) errA.style.display = 'none';
+        pinta();
+        limpiarFormularioAdmin();
+        cerrarAdmin();
         
-        const errL = clone.querySelector('#errorLogin');
-        if(errL) errL.style.display = 'none';
-        
-        // Eliminar notificaciones (toasts) residuales
-        clone.querySelectorAll('.toast').forEach(t => t.remove());
-        
-        // Generar HTML base
-        let html = '<!DOCTYPE html>\n' + clone.outerHTML;
-
-        // Convertir el array actual de cursos a string formateado
-        // Reemplazamos las comillas de las claves para que quede como el código original
-        const cursosStr = JSON.stringify(cursos, null, 6).replace(/"([^"]+)":/g, '$1:');
-
-        // Buscar el bloque let cursos = [...] en el HTML y reemplazarlo con el actualizado
-        const regex = /let cursos = \[[\s\S]*?\];/;
-        html = html.replace(regex, 'let cursos = ' + cursosStr.trim() + ';');
-
-        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'index.html';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        mostrarToast('✓ index.html descargado', '#16a34a');
+        const areaActual = document.getElementById('fArea').value;
+        if (areaActual !== 'Todas' && areaActual !== area) syncArea('Todas');
+        mostrarToast('✓ Curso "' + titulo.slice(0, 40) + (titulo.length > 40 ? '…' : '') + '" guardado correctamente', '#16a34a');
+        setTimeout(() => { const el = document.getElementById(isEdit ? editId : datosCurso.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400);
       } catch (e) {
-        console.error(e);
-        mostrarToast('Error al generar el HTML', '#dc2626');
+        console.error('Error guardando curso', e);
+        errEl.textContent = 'Hubo un error al guardar. Comprueba tu conexión.';
+        errEl.style.display = 'block';
       }
     }
 
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('btnSubir');
-      if (window.scrollY > 400) {
-        btn.classList.add('visible');
-      } else {
-        btn.classList.remove('visible');
-      }
+      if (window.scrollY > 400) btn.classList.add('visible'); else btn.classList.remove('visible');
     });
   </script>
 
