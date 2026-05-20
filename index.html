@@ -1325,6 +1325,20 @@
     }
 
     
+    
+    .admin-actions-group {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+    
+    @media(max-width: 700px) {
+      .admin-actions-group {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
     .btn-admin-action {
       display: inline-flex;
       align-items: center;
@@ -1787,7 +1801,7 @@
         <div style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;">
           <div class="chip-top" style="margin-bottom:0">🩺 Formación para profesionales</div>
           <button class="zona-privada-btn" id="btnZonaPrivada" aria-label="Zona Privada - Acceso administración" onclick="abrirLogin()"><span class="lock-icon">🔒</span> <span class="zp-text">Zona Privada</span></button>
-          <button id="btnAddAdmin" class="btn-admin-action btn-admin-add" style="display:none; margin-left:10px;" onclick="abrirAdmin()" aria-label="Añadir Curso">➕ <span class="zp-text">Añadir Curso</span></button>
+          <button id="btnAddAdmin" class="btn-admin-action btn-admin-add" style="display:none; margin-left:10px;" onclick="abrirAdmin()" aria-label="Añadir Curso">➕ Añadir Curso</button>
         </div>
         <h1>Agenda Formativa</h1>
         <div class="subtitulo-hero">Centro de Salud Tiro de Pichón</div>
@@ -2233,8 +2247,10 @@
         
         let editButtons = "";
         if (adminAutenticado) {
-          editButtons = "<button class=\"btn-admin-action btn-admin-edit\" style=\"margin-left: auto;\" onclick=\"cargarEdicion('" + c.id + "')\">✏️ Editar</button>" +
-                        "<button class=\"btn-admin-action btn-admin-del\" onclick=\"eliminarCurso('" + c.id + "')\">❌ Eliminar</button>";
+          editButtons = "<div class=\"admin-actions-group\">" + 
+                        "<button class=\"btn-admin-action btn-admin-edit\" onclick=\"cargarEdicion('" + c.id + "')\">✏️ Editar</button>" +
+                        "<button class=\"btn-admin-action btn-admin-del\" onclick=\"eliminarCurso('" + c.id + "')\">❌ Eliminar</button>" +
+                        "</div>";
         }
 
         const hc = () => {
